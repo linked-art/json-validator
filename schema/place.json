@@ -1,0 +1,28 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"title": "Person Schema",
+	"type": "object",
+	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
+	"properties": {
+		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
+		"id": {"type": "string", "format": "uri"},
+		"type": {"type": "string", "enum": ["Place"]},
+		"_label": {"type": "string"},
+		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
+		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
+		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
+
+		"defined_by": {"type": "string"},
+		"approximated_by": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
+		"part_of": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}}
+
+	},
+	"definitions": {
+	},
+	"required": ["@context", "id", "type", "_label"],
+	"additionalProperties": false
+}

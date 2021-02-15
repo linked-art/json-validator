@@ -1,0 +1,263 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"title": "Core Schema Definitions",
+	"type": "object",
+
+	"definitions": {
+		"Node": {
+			"type": "object", 
+			"properties": {
+				"id": {"type": "string", "format": "uri"},
+				"type": {"type": "string"},
+				"_label": {"type": "string"}
+			},
+			"required": ["type"]
+		},
+		"ClassifiedResource": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
+			}
+		},
+		"DescribedResource": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {
+				"referred_to_by": {"type": "array", "items": {"$ref": "#/definitions/LingObjOrStatement"}}
+			}
+		},
+		"APIResource": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
+			"properties": {
+				"@context": {"$ref": "#/definitions/ContextStringOrArray"},
+				"equivalent": {"type": "array", "items": {"$ref": "#/definitions/Node"}}
+			},
+			"required": ["@context", "id", "_label"]
+		},
+
+
+		"Name": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {	
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
+				"type": {"type": "string", "enum": ["Name"]},
+				"content": {"type": "string"},
+				"language": {"type": "array", "items": {"$ref": "#/definitions/LanguageRef"}},
+				"part": {"type": "array", "items": {"$ref": "#/definitions/Name"}}
+			},
+			"required": ["content"],
+			"additionalProperties": false
+		},
+
+		"Identifier": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {	
+				"type": {"type": "string", "enum": ["Identifier"]},
+				"content": {"type": "string"},
+				"part": {"type": "array", "items": {"$ref": "#/definitions/Identifier"}},
+				"assigned_by": {"type": "array", "items": {"$ref": "#/definitions/AttributeAssignment"}}
+			}
+		},
+
+		"Statement": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["LinguisticObject"]},
+				"content": {"type": "string"},
+				"language": {"type": "array", "items": {"$ref": "#/definitions/LanguageRef"}}
+			}
+		},
+
+		"TimeSpan": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["TimeSpan"]},
+				"begin_of_the_begin": {"type": "string", "format": "date-time"},
+				"end_of_the_begin": {"type": "string", "format": "date-time"},	
+				"begin_of_the_end": {"type": "string", "format": "date-time"},
+				"end_of_the_end": {"type": "string", "format": "date-time"},
+				"duration": {"$ref": "#/definitions/Dimension"}
+			}
+		},
+
+		"Dimension": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Dimension"]},
+				"value": {"type": "number"},
+				"upper_value_limit": {"type": "number"},
+				"lower_value_limit": {"type": "number"},
+				"unit": {"$ref": "#/definitions/UnitRef"},
+				"assigned_by": {"type": "array", "items": {"$ref": "#/definitions/AttributeAssignment"}}
+			}
+		},
+		"MonetaryAmount": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["MonetaryAmount"]},
+				"value": {"type": "number"},
+				"upper_value_limit": {"type": "number"},
+				"lower_value_limit": {"type": "number"},				
+				"currency": {"$ref": "#/definitions/CurrencyRef"}
+			}
+		},
+
+		"Concept": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
+			"properties": {"type": {"type": "string", "enum": ["Type"]}}
+		},
+
+		"EventBase": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
+			"properties": {
+				"took_place_at": {"type": "array", "items": {"$ref": "#/definitions/PlaceRef"}},
+				"timespan": {"$ref": "#/definitions/TimeSpan"},
+				"caused_by": {"type": "array", "items": {"$ref": "#/definitions/EventRefOrActivityRef"}},
+				"part_of": {"$ref": "#/definitions/EventRef"}
+			}
+		},
+
+		"ActivityBase": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/EventBase"}],
+			"properties": {
+				"carried_out_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
+				"used_specific_object": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
+				"technique": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
+			}
+		},
+		"Activity": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Activity"]}
+			}
+		},
+		"AttributeAssignment": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["AttributeAssignment"]}
+			}
+		},
+
+		"VisualItem": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["VisualItem"]}
+			}
+		},
+
+
+
+		"NameOrIdentifier": {
+			"anyOf": [
+				{"$ref": "#/definitions/Name"},
+				{"$ref": "#/definitions/Identifier"}
+			]
+		},
+		"LingObjOrStatement": {
+			"anyOf": [
+				{"$ref": "#/definitions/Statement"},
+				{"$ref": "#/definitions/LinguisticObjectRef"}
+			]
+		},
+		"PersonRefOrGroupRef": {
+			"anyOf": [
+				{"$ref": "#/definitions/PersonRef"},
+				{"$ref": "#/definitions/GroupRef"}
+			]
+		},
+		"EventRefOrActivityRef": {
+			"anyOf": [
+				{"$ref": "#/definitions/EventRef"},
+				{"$ref": "#/definitions/ActivityRef"}
+			]
+		},
+
+		"EventRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Event"]}}
+		},
+		"ActivityRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Activity"]}}
+		},		
+		"PersonRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Person"]}}
+		},
+		"GroupRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Group"]}}
+		},
+
+		"PlaceRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Place"]}}
+		},
+		"SetRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Set"]}}
+		},	
+		"VisualItemRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["VisualItem"]}}
+		},
+
+		"UnitRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Unit"]}}
+		},
+		"CurrencyRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Currency"]}}
+		},
+		"MaterialRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Material"]}}
+		},
+		"LanguageRef": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"properties": {"type": {"type": "string", "enum": ["Language"]}}
+		},
+
+		"LinguisticObjectRef": {
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"type": "object",
+			"properties": {"type": {"type": "string", "enum": ["LinguisticObject"]}}
+		},
+
+		"ContextStringOrArray": {
+			"anyOf": [
+				{"type": "string", "enum": ["https://linked.art/ns/v1/linked-art.json"]},
+				{"type": "array", "items": [{"type": "string", "format": "uri"}]}
+			]
+		}
+	}
+}
