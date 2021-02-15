@@ -1,7 +1,7 @@
 {
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
-	"title": "Person Schema",
+	"title": "Place Schema",
 	"type": "object",
 	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
 	"properties": {
@@ -20,8 +20,6 @@
 		"approximated_by": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
 		"part_of": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}}
 
-	},
-	"definitions": {
 	},
 	"required": ["@context", "id", "type", "_label"],
 	"additionalProperties": false
