@@ -10,13 +10,12 @@ import json
 
 model_dirs = {
 	"place": "place",
-	"person": "person"
+	"person": "person",
+	"group": "group"
 }
 
 base_instance_dir = "../linked.art/content/example"
 schema_dir = "schema"
-
-
 
 for (k,v) in model_dirs.items():
 
@@ -39,12 +38,8 @@ for (k,v) in model_dirs.items():
 				v.validate(data)
 			except ValidationError as e:
 				print("Failed to validate %s" % fn)
-				if e.absolute_schema_path[-1] == u'required' and \
-					e.message.startswith("u'type'"):
-					continue
-
 				print(e.message)
 				print(e.absolute_schema_path)
 				print(e.absolute_path)
-				break
+
 			print("validated!")

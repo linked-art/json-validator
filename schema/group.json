@@ -1,21 +1,21 @@
 {
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
-	"title": "Person Schema",
+	"title": "Group Schema",
 	"type": "object",
 	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
 	"properties": {
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"type": "string", "format": "uri"},
-		"type": {"type": "string", "enum": ["Person"]},
+		"type": {"type": "string", "enum": ["Group"]},
 		"_label": {"type": "string"},
 		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
 		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/GroupRef"}},
 
-		"born": {"$ref": "#/definitions/Birth"},
-		"died": {"$ref": "#/definitions/Death"},
+		"formed_by": {"$ref": "#/definitions/Formation"},
+		"dissolved_by": {"$ref": "#/definitions/Dissolution"},
 		"carried_out": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}},
 		"contact_point": {"type": "array", "items": {"$ref": "core.json#/definitions/Identifier"}},
 		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
@@ -24,18 +24,18 @@
 
 	},
 	"definitions": {
-		"Birth": {
+		"Formation": {
 			"type": "object",
-			"allOf": [{"$ref": "core.json#/definitions/EventBase"}],
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
 			"properties": {
-				"type": {"type": "string", "enum": ["Birth"]}
+				"type": {"type": "string", "enum": ["Formation"]}
 			}
 		},
-		"Death": {
+		"Dissolution": {
 			"type": "object",
-			"allOf": [{"$ref": "core.json#/definitions/EventBase"}],
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
 			"properties": {
-				"type": {"type": "string", "enum": ["Death"]}
+				"type": {"type": "string", "enum": ["Dissolution"]}
 			}
 		}
 	},
