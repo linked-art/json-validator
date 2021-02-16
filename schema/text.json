@@ -22,8 +22,8 @@
 		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
 		"language": {"type": "array", "items": {"$ref": "core.json#/definitions/LanguageRef"}},
 		"part_of": {"$ref": "core.json#/definitions/LinguisticObjectRef"},
-		"about": {"$ref": "core.json#/definitions/Node"},
-		"refers_to": {"$ref": "core.json#/definitions/Node"},
+		"about": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"refers_to": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
 		"created_by": {"$ref": "#/definitions/Creation"},
 		"used_for": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}}
 

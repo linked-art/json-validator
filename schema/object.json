@@ -13,18 +13,19 @@
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
 		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
-		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}},
 		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
 		"subject_of": {"type": "array", "items": {"$ref": "core.json#/definitions/DigitalObject"}},
 
-		"attributed_by": {},
+		"attributed_by": {"type": "array", "items": {"$ref": "core.json#/definitions/AttributeAssignment"}},
 
 		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
-		"made_of": {"type": "array", "items": {"$ref": "core.json#/definitions/Material"}},
+		"made_of": {"type": "array", "items": {"$ref": "core.json#/definitions/MaterialRef"}},
 		"part_of": {"$ref": "core.json#/definitions/HumanMadeObjectRef"},
 
 		"current_owner": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
 		"current_custodian": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+		"current_permanent_custodian": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
 		"current_location": {"$ref": "core.json#/definitions/PlaceRef"},
 
 		"produced_by": {"$ref": "#/definitions/Production"},
@@ -32,10 +33,10 @@
 		"removed_by": {"$ref": "#/definitions/PartRemoval"},
 
 		"used_for": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}},
-		"shows": {},
-		"carries": {}
-
+		"shows": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItemRef"}},
+		"carries": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}}
 	},
+
 	"definitions": {
 		"Production": {
 			"type": "object",
@@ -60,7 +61,7 @@
 				"type": {"type": "string", "enum": ["PartRemoval"]},
 				"dimished": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}
 			}
-		},				
+		}				
 	},
 	"required": ["@context", "id", "type", "_label"],
 	"additionalProperties": false

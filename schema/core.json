@@ -151,7 +151,8 @@
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ActivityBase"}],
 			"properties": {
-				"type": {"type": "string", "enum": ["AttributeAssignment"]}
+				"type": {"type": "string", "enum": ["AttributeAssignment"]},
+				"assigned": {"$ref": "#/definitions/Node"}
 			}
 		},
 
@@ -160,6 +161,14 @@
 			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
 			"properties": {
 				"type": {"type": "string", "enum": ["VisualItem"]}
+			}
+		},
+
+		"DigitalObject": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["DigitalObject"]}
 			}
 		},
 
@@ -230,7 +239,7 @@
 		"UnitRef": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Unit"]}}
+			"properties": {"type": {"type": "string", "enum": ["MeasurementUnit"]}}
 		},
 		"CurrencyRef": {
 			"type": "object",

@@ -11,7 +11,9 @@ import json
 model_dirs = {
 	"place": "place",
 	"person": "person",
-	"group": "group"
+	"group": "group",
+	"text": "text",
+	"object": "object"
 }
 
 base_instance_dir = "../linked.art/content/example"
@@ -30,16 +32,24 @@ for (k,v) in model_dirs.items():
 	for f in files:
 		if f.endswith('.json'):
 			fn = os.path.join(exampledir, f)
-			print("processing file: %s" % fn)
+			print("-"*120)
+			print("Processing: %s" % fn)
 			fh = open(fn)
 			data = json.load(fh)
 			fh.close()
-			try:
-				v.validate(data)
-			except ValidationError as e:
-				print("Failed to validate %s" % fn)
-				print(e.message)
-				print(e.absolute_schema_path)
-				print(e.absolute_path)
 
-			print("validated!")
+			# try:
+			# 	v.validate(data)
+			# except ValidationError as e:
+			# 	print("Failed to validate %s" % fn)
+			# 	print(e.message)
+			# 	print(e.absolute_schema_path)
+			# 	print(e.absolute_path)
+
+			errs = []
+			for error in v.iter_errors(data):
+				errs.append(error)
+				print(f"  /{'/'.join([str(x) for x in error.absolute_path])} --> {error.message} ")
+
+			if not errs:
+				print("Validated!")
