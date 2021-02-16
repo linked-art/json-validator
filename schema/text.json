@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"title": "Text Schema",
+	"type": "object",
+	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
+	"properties": {
+		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
+		"id": {"type": "string", "format": "uri"},
+		"type": {"type": "string", "enum": ["LinguisticObject"]},
+		"_label": {"type": "string"},
+		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
+		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
+		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
+		"subject_of": {"type": "array", "items": {"$ref": "core.json#/definitions/DigitalObject"}},
+		"digitally_carried_by": {"type": "array", "items": {"$ref": "core.json#/definitions/DigitalObject"}},
+		"carried_by": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}},
+
+		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
+		"language": {"type": "array", "items": {"$ref": "core.json#/definitions/LanguageRef"}},
+		"part_of": {"$ref": "core.json#/definitions/LinguisticObjectRef"},
+		"about": {"$ref": "core.json#/definitions/Node"},
+		"refers_to": {"$ref": "core.json#/definitions/Node"},
+		"created_by": {"$ref": "#/definitions/Creation"},
+		"used_for": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}}
+
+	},
+	"definitions": {
+		"Creation": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Creation"]},
+				"part": {"type": "array", "items": {"$ref": "#/definitions/Creation"}}
+			}
+		}
+	},
+	"required": ["@context", "id", "type", "_label"],
+	"additionalProperties": false
+}

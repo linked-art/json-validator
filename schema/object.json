@@ -1,0 +1,67 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"title": "Object Schema",
+	"type": "object",
+	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
+	"properties": {
+		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
+		"id": {"type": "string", "format": "uri"},
+		"type": {"type": "string", "enum": ["HumanMadeObject"]},
+		"_label": {"type": "string"},
+		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
+		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
+		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
+		"subject_of": {"type": "array", "items": {"$ref": "core.json#/definitions/DigitalObject"}},
+
+		"attributed_by": {},
+
+		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
+		"made_of": {"type": "array", "items": {"$ref": "core.json#/definitions/Material"}},
+		"part_of": {"$ref": "core.json#/definitions/HumanMadeObjectRef"},
+
+		"current_owner": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+		"current_custodian": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+		"current_location": {"$ref": "core.json#/definitions/PlaceRef"},
+
+		"produced_by": {"$ref": "#/definitions/Production"},
+		"destroyed_by": {"$ref": "#/definitions/Destruction"},
+		"removed_by": {"$ref": "#/definitions/PartRemoval"},
+
+		"used_for": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}},
+		"shows": {},
+		"carries": {}
+
+	},
+	"definitions": {
+		"Production": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Production"]},
+				"part": {"type": "array", "items": {"$ref": "#/definitions/Production"}}
+			}
+		},
+		"Destruction": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/EventBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Destruction"]},
+				"part": {"type": "array", "items": {"$ref": "#/definitions/Destruction"}}
+			}
+		},
+		"PartRemoval": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["PartRemoval"]},
+				"dimished": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}
+			}
+		},				
+	},
+	"required": ["@context", "id", "type", "_label"],
+	"additionalProperties": false
+}

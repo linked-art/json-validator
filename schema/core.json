@@ -136,6 +136,7 @@
 			"properties": {
 				"carried_out_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
 				"used_specific_object": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
+				"influenced_by": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
 				"technique": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
 			}
 		},
