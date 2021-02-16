@@ -13,15 +13,14 @@
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
 		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/GroupRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
 
 		"born": {"$ref": "#/definitions/Birth"},
 		"died": {"$ref": "#/definitions/Death"},
 		"carried_out": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}},
 		"contact_point": {"type": "array", "items": {"$ref": "core.json#/definitions/Identifier"}},
-		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
-		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRef"}},
-		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}}
-
+		"residence": {"type": "array", "items": {"$ref": "core.json#/definitons/PlaceRef"}}
 	},
 	"definitions": {
 		"Birth": {
