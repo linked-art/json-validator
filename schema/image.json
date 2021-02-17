@@ -1,7 +1,7 @@
 {
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
-	"title": "Image Schema",
+	"title": "Visual Content Schema",
 	"type": "object",
 	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
 	"properties": {
@@ -16,7 +16,11 @@
 		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRef"}},
 		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
 		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
-		"created_by": {"$ref": "#/definitions/Creation"}
+		"created_by": {"$ref": "#/definitions/Creation"},
+		"represents": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"about": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"shown_by": {},
+		"digitally_shown_by": {}
 	},
 	"definitions": {
 		"Creation": {

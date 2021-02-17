@@ -152,7 +152,22 @@
 			"required": ["value", "currency"],
 			"additionalProperties": false			
 		},
-
+		"Right": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitionsDescribedResource"}],
+			"properties": {
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
+				"referred_to_by": {"type": "array", "items": {"$ref": "#/definitions/LingObjOrStatement"}},
+				"type": {"type": "string", "enum": ["Right"]},
+				"possessed_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
+				"applies_to": {"type": "array", "items": {"$ref": "#/definitions/HumanMadeObjectRef"}},
+				"dimension": {"type": "array", "items": {"$ref": "#/definitions/Dimension"}},
+				"part": {"type": "array", "items": {"$ref": "#/definitionsRight"}}
+			},
+			"additionalProperties": false
+		},
 
 
 		"Concept": {
