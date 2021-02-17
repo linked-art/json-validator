@@ -13,6 +13,7 @@
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
 		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
 		"created_by": {"$ref": "#/definitions/Creation"},
 		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
 		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}}

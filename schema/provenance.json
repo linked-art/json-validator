@@ -1,0 +1,111 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"title": "Provenance Activity Schema",
+	"type": "object",
+	"allOf": [{"$ref": "core.json#/definitions/APIResource", "core.json#/definitions/ActivityBase"}],
+	"properties": {
+		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
+		"id": {"type": "string", "format": "uri"},
+		"type": {"type": "string", "enum": ["Activity"]},
+		"_label": {"type": "string"},
+		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
+		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
+		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
+
+		"carried_out_by": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+		"used_specific_object": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"influenced_by": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"technique": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
+		"took_place_at": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
+		"timespan": {"$ref": "core.json#/definitions/TimeSpan"},
+		"caused_by": {"type": "array", "items": {"$ref": "core.json#/definitions/EventRefOrActivityRef"}},
+		"part_of": {"$ref": "core.json#/definitions/EventRef"},
+
+		"part": {"type": "array", "items": {"$ref": "#/definitions/PartOptions"}}
+	},
+
+	"definitions": {
+		"PartOptions": {
+			"anyOf": [
+				{"$ref": "#/definitions/Acquisition"},
+				{"$ref": "#/definitions/RightAcquisition"},
+				{"$ref": "#/definitions/TransferOfCustody"},				
+				{"$ref": "#/definitions/Payment"},	
+				{"$ref": "#/definitions/Encounter"},	
+				{"$ref": "#/definitions/Move"},	
+				{"$ref": "#/definitions/Promise"}
+			]
+		},
+
+		"Acquisition": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Acquisition"]},
+				"transferred_title_from": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+				"transferred_title_to": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+				"transferred_title_of": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}}
+			}
+		},
+		"TransferOfCustody": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["TransferOfCustody"]},
+				"transferred_custody_from": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+				"transferred_custody_to": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+				"transferred_custody_of": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}}
+			}
+		},
+		"Payment": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Payment"]},
+				"paid_from": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+				"paid_to": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+				"paid_amount": {"$ref": "core.json#/definitions/MonetaryAmount"}
+			}
+		},
+		"RightAcquisition": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["RightAcquisition"]},
+				"establishes": {"$ref": "core.json#/definitions/Right"},
+				"invalidates": {"type": "array", "items": {"$ref": "core.json#/definitions/Right"}}
+			}
+		},
+		"Move": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Move"]},
+				"moved_from": {"$ref": "core.json#/definitions/PlaceRef"},
+				"moved_to": {"$ref": "core.json#/definitions/PlaceRef"},
+				"moved": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}}
+			}
+		},		
+		"Encounter": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Encounter"]},
+				"encountered": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}}
+			}
+		},
+		"Promise": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Activity"]},
+			}
+		}
+	},
+	"required": ["@context", "id", "type", "_label", "classified_as"],
+	"additionalProperties": false
+}
