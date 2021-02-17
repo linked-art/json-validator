@@ -1,0 +1,29 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"title": "Event Schema",
+	"type": "object",
+	"allOf": [{"$ref": "core.json#/definitions/APIResource", "core.json#/definitions/ActivityBase"}],
+	"properties": {
+		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
+		"id": {"type": "string", "format": "uri"},
+		"type": {"type": "string", "enum": ["Event", "Activity"]},
+		"_label": {"type": "string"},
+		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
+		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
+		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
+
+		"carried_out_by": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
+		"used_specific_object": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"influenced_by": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},
+		"took_place_at": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
+		"timespan": {"$ref": "core.json#/definitions/TimeSpan"},
+		"caused_by": {"type": "array", "items": {"$ref": "core.json#/definitions/EventRefOrActivityRef"}},
+		"part_of": {"$ref": "core.json#/definitions/EventRef"},
+	},
+	"required": ["@context", "id", "type", "_label"],
+	"additionalProperties": false
+}
