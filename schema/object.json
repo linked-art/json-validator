@@ -11,7 +11,7 @@
 		"_label": {"type": "string"},
 		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
-		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
 		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}},
 		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
@@ -22,6 +22,7 @@
 		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
 		"made_of": {"type": "array", "items": {"$ref": "core.json#/definitions/MaterialRef"}},
 		"part_of": {"$ref": "core.json#/definitions/HumanMadeObjectRef"},
+        "part": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectPart"}},
 
 		"current_owner": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
 		"current_custodian": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRefOrGroupRef"}},
@@ -30,7 +31,7 @@
 
 		"produced_by": {"$ref": "#/definitions/Production"},
 		"destroyed_by": {"$ref": "#/definitions/Destruction"},
-		"removed_by": {"$ref": "#/definitions/PartRemoval"},
+		"removed_by": {"type": "array", "items": {"$ref": "#/definitions/PartRemoval"}},
 
 		"used_for": {"type": "array", "items": {"$ref": "core.json#/definitions/Activity"}},
 		"shows": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItemRef"}},
@@ -59,7 +60,7 @@
 			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
 			"properties": {
 				"type": {"type": "string", "enum": ["PartRemoval"]},
-				"dimished": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}
+				"diminished": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}
 			}
 		}				
 	},

@@ -1,25 +1,31 @@
 {
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
-	"title": "Place Schema",
+	"title": "Collection Schema",
 	"type": "object",
 	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
 	"properties": {
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"type": "string", "format": "uri"},
-		"type": {"type": "string", "enum": ["Place"]},
+		"type": {"type": "string", "enum": ["Set"]},
 		"_label": {"type": "string"},
 		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
 		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
-		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
-		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
-
-		"defined_by": {"type": "string"},
-		"approximated_by": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}},
-		"part_of": {"type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}}
-
+		"created_by": {"$ref": "#/definitions/Creation"},
+		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
+		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}}
+	},
+	"definitions": {
+		"Creation": {
+			"type": "object",
+			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["Creation"]},
+				"part": {"type": "array", "items": {"$ref": "#/definitions/Creation"}}
+			}
+		}
 	},
 	"required": ["@context", "id", "type", "_label"],
 	"additionalProperties": false

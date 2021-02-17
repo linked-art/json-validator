@@ -11,7 +11,7 @@
 		"_label": {"type": "string"},
 		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
-		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
 		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
 		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
@@ -20,6 +20,7 @@
 		"carried_by": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}},
 
 		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
+        "content": {"type": "string"},
 		"language": {"type": "array", "items": {"$ref": "core.json#/definitions/LanguageRef"}},
 		"part_of": {"$ref": "core.json#/definitions/LinguisticObjectRef"},
 		"about": {"type": "array", "items": {"$ref": "core.json#/definitions/Node"}},

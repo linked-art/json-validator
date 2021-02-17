@@ -37,6 +37,26 @@
 			},
 			"required": ["@context", "id", "_label"]
 		},
+		"EventBase": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
+			"properties": {
+				"took_place_at": {"type": "array", "items": {"$ref": "#/definitions/PlaceRef"}},
+				"timespan": {"$ref": "#/definitions/TimeSpan"},
+				"caused_by": {"type": "array", "items": {"$ref": "#/definitions/EventRefOrActivityRef"}},
+				"part_of": {"$ref": "#/definitions/EventRef"}
+			}
+		},
+		"ActivityBase": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/EventBase"}],
+			"properties": {
+				"carried_out_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
+				"used_specific_object": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
+				"influenced_by": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
+				"technique": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
+			}
+		},
 
 
 		"Name": {
@@ -54,92 +74,100 @@
 			"required": ["content"],
 			"additionalProperties": false
 		},
-
 		"Identifier": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
 			"properties": {	
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
 				"type": {"type": "string", "enum": ["Identifier"]},
 				"content": {"type": "string"},
 				"part": {"type": "array", "items": {"$ref": "#/definitions/Identifier"}},
 				"assigned_by": {"type": "array", "items": {"$ref": "#/definitions/AttributeAssignment"}}
-			}
+			},
+			"required": ["content"],
+			"additionalProperties": false
 		},
-
 		"Statement": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
 			"properties": {
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
 				"type": {"type": "string", "enum": ["LinguisticObject"]},
 				"content": {"type": "string"},
 				"language": {"type": "array", "items": {"$ref": "#/definitions/LanguageRef"}}
-			}
+			},
+			"required": ["content"],
+			"additionalProperties": false
 		},
-
 		"TimeSpan": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
 			"properties": {
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
 				"type": {"type": "string", "enum": ["TimeSpan"]},
 				"begin_of_the_begin": {"type": "string", "format": "date-time"},
 				"end_of_the_begin": {"type": "string", "format": "date-time"},	
 				"begin_of_the_end": {"type": "string", "format": "date-time"},
 				"end_of_the_end": {"type": "string", "format": "date-time"},
 				"duration": {"$ref": "#/definitions/Dimension"}
-			}
+			},
+			"additionalProperties": false
 		},
-
 		"Dimension": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
 			"properties": {
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
 				"type": {"type": "string", "enum": ["Dimension"]},
 				"value": {"type": "number"},
 				"upper_value_limit": {"type": "number"},
 				"lower_value_limit": {"type": "number"},
 				"unit": {"$ref": "#/definitions/UnitRef"},
 				"assigned_by": {"type": "array", "items": {"$ref": "#/definitions/AttributeAssignment"}}
-			}
+			},
+			"required": ["value", "unit"],
+			"additionalProperties": false
 		},
 		"MonetaryAmount": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
 			"properties": {
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
 				"type": {"type": "string", "enum": ["MonetaryAmount"]},
 				"value": {"type": "number"},
 				"upper_value_limit": {"type": "number"},
 				"lower_value_limit": {"type": "number"},				
 				"currency": {"$ref": "#/definitions/CurrencyRef"}
-			}
+			},
+			"required": ["value", "currency"],
+			"additionalProperties": false			
 		},
+
+
 
 		"Concept": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {"type": {"type": "string", "enum": ["Type"]}}
+			"properties": {
+				"id": {"type": "string", "format": "uri"},				
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
+				"type": {"type": "string", "enum": ["Type"]}
+			},
+			"additionalProperties": false
 		},
 
-		"EventBase": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
-			"properties": {
-				"took_place_at": {"type": "array", "items": {"$ref": "#/definitions/PlaceRef"}},
-				"timespan": {"$ref": "#/definitions/TimeSpan"},
-				"caused_by": {"type": "array", "items": {"$ref": "#/definitions/EventRefOrActivityRef"}},
-				"part_of": {"$ref": "#/definitions/EventRef"}
-			}
-		},
-
-		"ActivityBase": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/EventBase"}],
-			"properties": {
-				"carried_out_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
-				"used_specific_object": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
-				"influenced_by": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
-				"technique": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
-			}
-		},
 		"Activity": {
 			"type": "object",
 			"allOf": [{"$ref": "#/definitions/ActivityBase"}],
@@ -172,7 +200,24 @@
 			}
 		},
 
-
+		"HumanMadeObjectPart": {
+			"type": "object",
+			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
+			"properties": {
+				"type": {"type": "string", "enum": ["HumanMadeObject"]},
+				"_label": {"type": "string"},
+				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
+				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
+				"referred_to_by": {"type": "array", "items": {"$ref": "#/definitions/LingObjOrStatement"}},
+				"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
+				"made_of": {"type": "array", "items": {"$ref": "core.json#/definitions/MaterialRef"}},
+		        "part": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectPart"}},
+				"shows": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItemRef"}},
+				"carries": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},				
+				"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}}
+			},
+			"additionalProperties": false
+		},
 
 		"NameOrIdentifier": {
 			"anyOf": [
@@ -186,6 +231,14 @@
 				{"$ref": "#/definitions/LinguisticObjectRef"}
 			]
 		},
+		"LingObjOrDigitalObjOrStatement": {
+			"anyOf": [
+				{"$ref": "#/definitions/Statement"},
+				{"$ref": "#/definitions/DigitalObjectRef"},
+				{"$ref": "#/definitions/LinguisticObjectRef"}
+			]
+		},
+
 		"PersonRefOrGroupRef": {
 			"anyOf": [
 				{"$ref": "#/definitions/PersonRef"},
@@ -261,6 +314,16 @@
 			"allOf": [{"$ref": "#/definitions/Node"}],
 			"type": "object",
 			"properties": {"type": {"type": "string", "enum": ["LinguisticObject"]}}
+		},
+		"DigitalObjectRef": {
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"type": "object",
+			"properties": {"type": {"type": "string", "enum": ["DigitalObject"]}}
+		},
+		"HumanMadeObjectRef": {
+			"allOf": [{"$ref": "#/definitions/Node"}],
+			"type": "object",
+			"properties": {"type": {"type": "string", "enum": ["HumanMadeObject"]}}
 		},
 
 		"ContextStringOrArray": {

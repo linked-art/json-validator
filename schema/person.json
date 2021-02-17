@@ -11,7 +11,7 @@
 		"_label": {"type": "string"},
 		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
 		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
-		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrStatement"}},
+		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
 		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/GroupRef"}},
 		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/PersonRef"}},
 		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}},
