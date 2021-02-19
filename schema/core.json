@@ -1,351 +1,1387 @@
 {
-	"$schema": "http://json-schema.org/schema#",
-	"title": "Core Schema Definitions",
-	"type": "object",
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Core Schema Definitions",
+    "description": "Core definitions that are used to compose the Linked Art JSON-LD API",
+    "type": "object",
+    "definitions": {
+        "idProp": {
+            "title": "<subject uri>",
+            "description": "The URI of the entity",
+            "type": "string",
+            "format": "uri"
+        },
+        "labelProp": {
+            "title": "rdfs:label",
+            "description": "A human readable name or label for the entity, intended for developers",
+            "type": "string"
+        },
+        "typeProp": {
+            "title": "rdf:type",
+            "description": "The class of the entity, such as `Person`, `Place` or `HumanMadeObject`",
+            "type": "string"
+        },
+        "identified_byProp": {
+            "title": "crm:P1_is_identified_by",
+            "description": "A `Name` or `Identifier` that identifies the entity",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NameOrIdentifier"
+            }
+        },
+        "classified_asProp": {
+            "title": "crm:P2_has_type",
+            "description": "A `Type` which classifies this entity beyond the class given in the `type` property",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Concept"
+            }
+        },
+        "contentProp": {
+            "title": "crm:P190_has_symbolic_content",
+            "description": "The string representation of a `Name`, `Identifier`, `Statement` or other text",
+            "type": "string"
+        },
+        "referred_to_byProp": {
+            "title": "crm:P67i_is_referred_to_by",
+            "description": "An embedded statement about this entity, or a reference to a text that refers to the entity",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/LingObjOrDigitalObjOrStatement"
+            }
+        },
+        "languageProp": {
+            "title": "crm:PXX_has_language",
+            "description": "A reference to one or more `Language` entities in which the `content` of this text is written",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/LanguageRef"
+            }
+        },
+        "equivalentProp": {
+            "title": "la:equivalent",
+            "description": "A reference to one or more other identities for this entity, such as in external vocabularies or systems",
+            "type": "array"
+        },
+        "representationProp": {
+            "title": "crm:PXX_has_representation",
+            "description": "A reference to one or more `VisualItem` entities which depict this entity",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/VisualItem"
+            }
+        },
+        "member_ofSetProp": {
+            "title": "la:member_of",
+            "description": "A reference to one or more `Set` entities of which this entity is a member",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/SetRef"
+            }
+        },
+        "member_ofGroupProp": {
+            "title": "crm:PXX_is_member_of",
+            "description": "A reference to one or more `Group` entities of which this entity is a member",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/GroupRef"
+            }
+        },
+        "valueProp": {
+            "title": "crm:P90_has_value",
+            "description": "The numeric value of a `Dimension` or `MonetaryAmount`",
+            "type": "number"
+        },
+        "upper_value_limitProp": {
+            "title": "crm:P90a_has_upper_value_limit",
+            "description": "The highest possible value for the `Dimension` or `MonetaryAmount`",
+            "type": "number"
+        },
+        "lower_value_limitProp": {
+            "title": "crm:P90a_has_lower_value_limit",
+            "description": "The lowest possible value for the `Dimension` or `MonetaryAmount`",
+            "type": "number"
+        },
+        "took_place_atProp": {
+            "title": "crm:P7_took_place_at",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/PlaceRef"
+            }
+        },
+        "timespanProp": {
+            "title": "crm:P4_has_time-span",
+            "description": "",
+            "$ref": "#/definitions/TimeSpan"
+        },
+        "caused_byProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/EventRefOrActivityRef"
+            }
+        },
+        "carried_out_byProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/PersonRefOrGroupRef"
+            }
+        },
+        "techniqueProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Concept"
+            }
+        },
+        "used_specific_objectProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/HumanMadeObjectRefOrSetRef"
+            }
+        },
+        "influenced_byProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/HumanMadeObjectRefOrPersonRefOrGroupRef"
+            }
+        },
+        "carried_outProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Activity"
+            }
+        },
+        "contact_pointProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Identifier"
+            }
+        },
+        "residenceProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/PlaceRef"
+            }
+        },
 
-	"definitions": {
-		"Node": {
-			"type": "object", 
-			"properties": {
-				"id": {"type": "string", "format": "uri"},
-				"type": {"type": "string"},
-				"_label": {"type": "string"}
-			},
-			"required": ["type"]
-		},
-		"ClassifiedResource": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
-			}
-		},
-		"DescribedResource": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {
-				"referred_to_by": {"type": "array", "items": {"$ref": "#/definitions/LingObjOrStatement"}}
-			}
-		},
-		"APIResource": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
-			"properties": {
-				"@context": {"$ref": "#/definitions/ContextStringOrArray"},
-				"equivalent": {"type": "array", "items": {"$ref": "#/definitions/Node"}}
-			},
-			"required": ["@context", "id", "_label"]
-		},
-		"EventBase": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
-			"properties": {
-				"took_place_at": {"type": "array", "items": {"$ref": "#/definitions/PlaceRef"}},
-				"timespan": {"$ref": "#/definitions/TimeSpan"},
-				"caused_by": {"type": "array", "items": {"$ref": "#/definitions/EventRefOrActivityRef"}},
-				"part_of": {"$ref": "#/definitions/EventRef"}
-			}
-		},
-		"ActivityBase": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/EventBase"}],
-			"properties": {
-				"carried_out_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
-				"used_specific_object": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
-				"influenced_by": {"type": "array", "items": {"$ref": "#/definitions/Node"}},
-				"technique": {"type": "array", "items": {"$ref": "#/definitions/Concept"}}
-			}
-		},
 
-
-		"Name": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {	
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["Name"]},
-				"content": {"type": "string"},
-				"language": {"type": "array", "items": {"$ref": "#/definitions/LanguageRef"}},
-				"part": {"type": "array", "items": {"$ref": "#/definitions/Name"}}
-			},
-			"required": ["content"],
-			"additionalProperties": false
-		},
-		"Identifier": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {	
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["Identifier"]},
-				"content": {"type": "string"},
-				"part": {"type": "array", "items": {"$ref": "#/definitions/Identifier"}},
-				"assigned_by": {"type": "array", "items": {"$ref": "#/definitions/AttributeAssignment"}}
-			},
-			"required": ["content"],
-			"additionalProperties": false
-		},
-		"Statement": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["LinguisticObject"]},
-				"content": {"type": "string"},
-				"language": {"type": "array", "items": {"$ref": "#/definitions/LanguageRef"}}
-			},
-			"required": ["content"],
-			"additionalProperties": false
-		},
-		"TimeSpan": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["TimeSpan"]},
-				"begin_of_the_begin": {"type": "string", "format": "date-time"},
-				"end_of_the_begin": {"type": "string", "format": "date-time"},	
-				"begin_of_the_end": {"type": "string", "format": "date-time"},
-				"end_of_the_end": {"type": "string", "format": "date-time"},
-				"duration": {"$ref": "#/definitions/Dimension"}
-			},
-			"additionalProperties": false
-		},
-		"Dimension": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["Dimension"]},
-				"value": {"type": "number"},
-				"upper_value_limit": {"type": "number"},
-				"lower_value_limit": {"type": "number"},
-				"unit": {"$ref": "#/definitions/UnitRef"},
-				"assigned_by": {"type": "array", "items": {"$ref": "#/definitions/AttributeAssignment"}}
-			},
-			"required": ["value", "unit"],
-			"additionalProperties": false
-		},
-		"MonetaryAmount": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["MonetaryAmount"]},
-				"value": {"type": "number"},
-				"upper_value_limit": {"type": "number"},
-				"lower_value_limit": {"type": "number"},				
-				"currency": {"$ref": "#/definitions/CurrencyRef"}
-			},
-			"required": ["value", "currency"],
-			"additionalProperties": false			
-		},
-		"Right": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitionsDescribedResource"}],
-			"properties": {
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"referred_to_by": {"type": "array", "items": {"$ref": "#/definitions/LingObjOrStatement"}},
-				"type": {"type": "string", "enum": ["Right"]},
-				"possessed_by": {"type": "array", "items": {"$ref": "#/definitions/PersonRefOrGroupRef"}},
-				"applies_to": {"type": "array", "items": {"$ref": "#/definitions/HumanMadeObjectRef"}},
-				"dimension": {"type": "array", "items": {"$ref": "#/definitions/Dimension"}},
-				"part": {"type": "array", "items": {"$ref": "#/definitionsRight"}}
-			},
-			"additionalProperties": false
-		},
-
-
-		"Concept": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ClassifiedResource"}],
-			"properties": {
-				"id": {"type": "string", "format": "uri"},				
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"type": {"type": "string", "enum": ["Type"]}
-			},
-			"additionalProperties": false
-		},
-
-		"Activity": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ActivityBase"}],
-			"properties": {
-				"type": {"type": "string", "enum": ["Activity"]}
-			}
-		},
-		"AttributeAssignment": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/ActivityBase"}],
-			"properties": {
-				"type": {"type": "string", "enum": ["AttributeAssignment"]},
-				"assigned": {"$ref": "#/definitions/Node"}
-			}
-		},
-
-		"VisualItem": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
-			"properties": {
-				"type": {"type": "string", "enum": ["VisualItem"]}
-			}
-		},
-
-		"DigitalObject": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
-			"properties": {
-				"type": {"type": "string", "enum": ["DigitalObject"]}
-			}
-		},
-
-		"HumanMadeObjectPart": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/DescribedResource"}],
-			"properties": {
-				"type": {"type": "string", "enum": ["HumanMadeObject"]},
-				"_label": {"type": "string"},
-				"identified_by": {"type": "array", "items": {"$ref": "#/definitions/NameOrIdentifier"}},
-				"classified_as": {"type": "array", "items": {"$ref": "#/definitions/Concept"}},
-				"referred_to_by": {"type": "array", "items": {"$ref": "#/definitions/LingObjOrStatement"}},
-				"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
-				"made_of": {"type": "array", "items": {"$ref": "core.json#/definitions/MaterialRef"}},
-		        "part": {"type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectPart"}},
-				"shows": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItemRef"}},
-				"carries": {"type": "array", "items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},				
-				"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}}
-			},
-			"additionalProperties": false
-		},
-
-		"NameOrIdentifier": {
-			"anyOf": [
-				{"$ref": "#/definitions/Name"},
-				{"$ref": "#/definitions/Identifier"}
-			]
-		},
-		"LingObjOrStatement": {
-			"anyOf": [
-				{"$ref": "#/definitions/Statement"},
-				{"$ref": "#/definitions/LinguisticObjectRef"}
-			]
-		},
-		"LingObjOrDigitalObjOrStatement": {
-			"anyOf": [
-				{"$ref": "#/definitions/Statement"},
-				{"$ref": "#/definitions/DigitalObjectRef"},
-				{"$ref": "#/definitions/LinguisticObjectRef"}
-			]
-		},
-
-		"PersonRefOrGroupRef": {
-			"anyOf": [
-				{"$ref": "#/definitions/PersonRef"},
-				{"$ref": "#/definitions/GroupRef"}
-			]
-		},
-		"EventRefOrActivityRef": {
-			"anyOf": [
-				{"$ref": "#/definitions/EventRef"},
-				{"$ref": "#/definitions/ActivityRef"}
-			]
-		},
-
-		"EventRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Event"]}}
-		},
-		"ActivityRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Activity"]}}
-		},		
-		"PersonRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Person"]}}
-		},
-		"GroupRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Group"]}}
-		},
-
-		"PlaceRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Place"]}}
-		},
-		"SetRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Set"]}}
-		},	
-		"VisualItemRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["VisualItem"]}}
-		},
-
-		"UnitRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["MeasurementUnit"]}}
-		},
-		"CurrencyRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Currency"]}}
-		},
-		"MaterialRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Material"]}}
-		},
-		"LanguageRef": {
-			"type": "object",
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"properties": {"type": {"type": "string", "enum": ["Language"]}}
-		},
-
-		"LinguisticObjectRef": {
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"type": "object",
-			"properties": {"type": {"type": "string", "enum": ["LinguisticObject"]}}
-		},
-		"DigitalObjectRef": {
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"type": "object",
-			"properties": {"type": {"type": "string", "enum": ["DigitalObject"]}}
-		},
-		"HumanMadeObjectRef": {
-			"allOf": [{"$ref": "#/definitions/Node"}],
-			"type": "object",
-			"properties": {"type": {"type": "string", "enum": ["HumanMadeObject"]}}
-		},
-
-		"ContextStringOrArray": {
-			"anyOf": [
-				{"type": "string", "enum": ["https://linked.art/ns/v1/linked-art.json"]},
-				{"type": "array", "items": [{"type": "string", "format": "uri"}]}
-			]
-		}
-	}
+        "Name": {
+            "title": "crm:E33_E41_Linguistic_Appellation",
+            "description": "A name of an entity",
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "Name"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "content": {
+                    "$ref": "#/definitions/contentProp"
+                },
+                "language": {
+                    "$ref": "#/definitions/languageProp"
+                },
+                "part": {
+                    "description": "A list of one or more `Name` structures, which are parts of this `Name`",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Name"
+                    }
+                }
+            },
+            "required": [
+                "type",
+                "content"
+            ],
+            "additionalProperties": false
+        },
+        "Identifier": {
+            "title": "crm:E42_Identifier",
+            "description": "An identifier for an entity",
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "Identifier"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "content": {
+                    "$ref": "#/definitions/contentProp"
+                },
+                "part": {
+                    "description": "A list of one or more `Identifier` structures, which are parts of this `Identifier`",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Identifier"
+                    }
+                },
+                "assigned_by": {
+                    "description": "The activity through which this `Identifier` was assigned to the entity",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AttributeAssignment"
+                    }
+                }
+            },
+            "required": [
+                "type",
+                "content"
+            ],
+            "additionalProperties": false
+        },
+        "Statement": {
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "LinguisticObject"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "content": {
+                    "$ref": "#/definitions/contentProp"
+                },
+                "language": {
+                    "$ref": "#/definitions/languageProp"
+                }
+            },
+            "required": [
+                "type",
+                "content"
+            ],
+            "additionalProperties": false
+        },
+        "TimeSpan": {
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "TimeSpan"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "begin_of_the_begin": {
+                    "title": "crm:P82a_begin_of_the_begin",
+                    "description": "The earliest possible date-time at which the timespan could have started",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "end_of_the_begin": {
+                    "title": "crm:P81a_end_of_the_begin",
+                    "description": "The latest possible date-time at which the timespan could have started",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "begin_of_the_end": {
+                    "title": "crm:P81b_begin_of_the_end",
+                    "description": "The earliest possible date-time at which the timespan could have ended",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "end_of_the_end": {
+                    "title": "crm:P82b_end_of_the_end",
+                    "description": "The latest possible date-time at which the timespan could have ended",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "duration": {
+                    "title": "crm:P191_had_duration",
+                    "description": "A `Dimension` that describes the duration of the timespan within any given date-times",
+                    "$ref": "#/definitions/Dimension"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "Dimension": {
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",                        	
+                            "type": "string",
+                            "enum": [
+                                "Dimension"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "value": {
+                    "$ref": "#/definitions/valueProp"
+                },
+                "lower_value_limit": {
+                    "$ref": "#/definitions/lower_value_limitProp"
+                },
+                "upper_value_limit": {
+                    "$ref": "#/definitions/upper_value_limitProp"
+                },
+                "unit": {
+                    "$ref": "#/definitions/UnitRef"
+                },
+                "assigned_by": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AttributeAssignment"
+                    }
+                }
+            },
+            "required": [
+                "type",
+                "value",
+                "unit"
+            ],
+            "additionalProperties": false
+        },
+        "MonetaryAmount": {
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",                        	
+                            "type": "string",
+                            "enum": [
+                                "MonetaryAmount"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "value": {
+                    "$ref": "#/definitions/valueProp"
+                },
+                "lower_value_limit": {
+                    "$ref": "#/definitions/lower_value_limitProp"
+                },
+                "upper_value_limit": {
+                    "$ref": "#/definitions/upper_value_limitProp"
+                },
+                "currency": {
+                    "$ref": "#/definitions/CurrencyRef"
+                }
+            },
+            "required": [
+                "type",
+                "value",
+                "currency"
+            ],
+            "additionalProperties": false
+        },
+        "Right": {
+            "type": "object",
+            "properties": {
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",                        	
+                            "type": "string",
+                            "enum": [
+                                "Right"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "referred_to_by": {
+                    "$ref": "#/definitions/referred_to_byProp"
+                },
+                "possessed_by": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PersonRefOrGroupRef"
+                    }
+                },
+                "applies_to": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HumanMadeObjectRef"
+                    }
+                },
+                "dimension": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Dimension"
+                    }
+                },
+                "part": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitionsRight"
+                    }
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "Concept": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "Type"
+                            ]
+                        }
+                    ]
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "Activity": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "Activity"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "referred_to_by": {
+                    "$ref": "#/definitions/referred_to_byProp"
+                },
+                "took_place_at": {
+                    "$ref": "#/definitions/took_place_atProp"
+                },
+                "timespan": {
+                    "$ref": "#/definitions/timespanProp"
+                },
+                "caused_by": {
+                    "$ref": "#/definitions/caused_byProp"
+                },
+                "carried_out_by": {
+                    "$ref": "#/definitions/carried_out_byProp"
+                },
+                "used_specific_object": {
+                    "$ref": "#/definitions/used_specific_objectProp"
+                },
+                "influenced_by": {
+                    "$ref": "#/definitions/influenced_byProp"
+                },
+                "technique": {
+                    "$ref": "#/definitions/techniqueProp"
+                },
+                "part_of": {
+                    "$ref": "#/definitions/EventRefOrActivityRef"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "AttributeAssignment": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "AttributeAssignment"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "referred_to_by": {
+                    "$ref": "#/definitions/referred_to_byProp"
+                },
+                "took_place_at": {
+                    "$ref": "#/definitions/took_place_atProp"
+                },
+                "timespan": {
+                    "$ref": "#/definitions/timespanProp"
+                },
+                "caused_by": {
+                    "$ref": "#/definitions/caused_byProp"
+                },
+                "carried_out_by": {
+                    "$ref": "#/definitions/carried_out_byProp"
+                },
+                "used_specific_object": {
+                    "$ref": "#/definitions/used_specific_objectProp"
+                },
+                "influenced_by": {
+                    "$ref": "#/definitions/influenced_byProp"
+                },
+                "technique": {
+                    "$ref": "#/definitions/techniqueProp"
+                },
+                "part_of": {
+                    "$ref": "#/definitions/EventRefOrActivityRef"
+                },
+                "assigned": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VisualItem": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "VisualItem"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "referred_to_by": {
+                    "$ref": "#/definitions/referred_to_byProp"
+                }
+            }
+        },
+        "DigitalObject": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "DigitalObject"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                },
+                "identified_by": {
+                    "$ref": "#/definitions/identified_byProp"
+                },
+                "classified_as": {
+                    "$ref": "#/definitions/classified_asProp"
+                },
+                "referred_to_by": {
+                    "$ref": "#/definitions/referred_to_byProp"
+                }
+            }
+        },
+        "HumanMadeObjectPart": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "HumanMadeObject"
+                    ]
+                },
+                "_label": {
+                    "type": "string"
+                },
+                "identified_by": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NameOrIdentifier"
+                    }
+                },
+                "classified_as": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Concept"
+                    }
+                },
+                "referred_to_by": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LingObjOrStatement"
+                    }
+                },
+                "dimension": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "core.json#/definitions/Dimension"
+                    }
+                },
+                "made_of": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "core.json#/definitions/MaterialRef"
+                    }
+                },
+                "part": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "core.json#/definitions/HumanMadeObjectPart"
+                    }
+                },
+                "shows": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "core.json#/definitions/VisualItemRef"
+                    }
+                },
+                "carries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "core.json#/definitions/LinguisticObjectRef"
+                    }
+                },
+                "representation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "core.json#/definitions/VisualItem"
+                    }
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "NameOrIdentifier": {
+            "title": "Name or Identifier",
+            "description": "A Name or an Identifier",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Name"
+                },
+                {
+                    "$ref": "#/definitions/Identifier"
+                }
+            ]
+        },
+        "LingObjOrStatement": {
+            "title": "Linguistic Object Reference or Statement",
+            "description": "A Linguistic Object Reference or Statement",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Statement"
+                },
+                {
+                    "$ref": "#/definitions/LinguisticObjectRef"
+                }
+            ]
+        },
+        "LingObjOrDigitalObjOrStatement": {
+            "title": "Linguistic Object Reference, Digital Object Reference or Statement",
+            "description": "A Linguistic Object Reference, Digitial Object Reference or Statement",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Statement"
+                },
+                {
+                    "$ref": "#/definitions/DigitalObjectRef"
+                },
+                {
+                    "$ref": "#/definitions/LinguisticObjectRef"
+                }
+            ]
+        },
+        "PersonRefOrGroupRef": {
+            "title": "Reference to a Person or Group",
+            "description": "A Reference to a Person or Group",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/PersonRef"
+                },
+                {
+                    "$ref": "#/definitions/GroupRef"
+                }
+            ]
+        },
+        "EventRefOrActivityRef": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/EventRef"
+                },
+                {
+                    "$ref": "#/definitions/ActivityRef"
+                }
+            ]
+        },
+        "HumanMadeObjectRefOrSetRef": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/HumanMadeObjectRef"
+                },
+                {
+                    "$ref": "#/definitions/SetRef"
+                }
+            ]
+        },
+        "HumanMadeObjectRefOrPersonRefOrGroupRef": {
+            "title": "Reference to a Human Made Object, Person or Group",
+            "description": "A Reference to a Human Made Object,Person or Group",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/HumanMadeObjectRef"
+                },
+                {
+                    "$ref": "#/definitions/PersonRef"
+                },
+                {
+                    "$ref": "#/definitions/GroupRef"
+                }
+            ]
+        },
+        "ContextStringOrArray": {
+            "title": "JSON-LD Context",
+            "description": "Either an array of contexts, or a string containing the Linked Art context URI",
+            "anyOf": [
+                {
+                    "title": "Linked Art",
+                    "type": "string",
+                    "enum": [
+                        "https://linked.art/ns/v1/linked-art.json"
+                    ]
+                },
+                {
+                    "title": "Linked Art with Extensions",
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    ]
+                }
+            ]
+        },
+        "PlaceRef": {
+            "title": "Reference to a Place",
+            "description": "Reference to a `Place`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Place"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "PersonRef": {
+            "title": "Reference to a Person",
+            "description": "Reference to a `Person`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Person"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "GroupRef": {
+            "title": "Reference to a Group",
+            "description": "Reference to a `Group`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Group"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "HumanMadeObjectRef": {
+            "title": "Reference to a Human-Made Object",
+            "description": "Reference to a `HumanMadeObject`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "HumanMadeObject"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "DigitalObjectRef": {
+            "title": "Reference to a Digital Object",
+            "description": "Reference to a `DigitalObject`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "DigitalObject"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LinguisticObjectRef": {
+            "title": "Reference to a Linguistic Object",
+            "description": "Reference to a `LinguisticObject`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "LinguisticObject"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "SetRef": {
+            "title": "Reference to a Set",
+            "description": "Reference to a `Set`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Set"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "EventRef": {
+            "title": "Reference to an Event",
+            "description": "Reference to an `Event`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Event"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "ActivityRef": {
+            "title": "Reference to an Activity",
+            "description": "Reference to an `Activity`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Activity"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VisualItemRef": {
+            "title": "Reference to a Visual Item",
+            "description": "Reference to a `VisualItem`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "VisualItem"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "UnitRef": {
+            "title": "Reference to a Measurement Unit",
+            "description": "Reference to a `MeasurementUnit`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "MeasurementUnit"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "CurrencyRef": {
+            "title": "Reference to a Currency",
+            "description": "Reference to a `Currency`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Currency"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "MaterialRef": {
+            "title": "Reference to a Material",
+            "description": "Reference to a `Material`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Material"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LanguageRef": {
+            "title": "Reference to a Language",
+            "description": "Reference to a `Language`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Language"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        }
+    }
 }
