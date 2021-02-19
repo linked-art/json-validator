@@ -2,24 +2,24 @@
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
 	"title": "Object Schema",
-	"type": "object",
+	"description": "A human-made object, part thereof, or a natural object with value imbued through interaction with human culture. See: [API](https://linked.art/api/1.0/endpoint/object/) | [Model](https://linked.art/model/object/)",	
 
+	"type": "object",
 	"properties": {
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"$ref": "core.json#/definitions/idProp"},				
 		"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-			{"title": "Specific", "type": "string", "enum": ["Person"]}]},
+			{"title": "Specific", "type": "string", "enum": ["HumanMadeObject"]}]},
 		"_label": {"$ref": "core.json#/definitions/labelProp"},
 		"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
 		"referred_to_by": {"$ref": "core.json#/definitions/referred_to_byProp"},
 		"equivalent": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/equivalentProp"}, 
-			{"title": "Specific", "description": "List of `Person` entities", "type": "array", "items": {"$ref": "core.json#/definitions/PersonRef"}}]},
+			{"title": "Specific", "description": "List of `HumanMadeObject` entities", "type": "array", "items": {"$ref": "core.json#/definitions/HumanMadeObjectRef"}}]},
 		"representation": {"$ref": "core.json#/definitions/representationProp"},
 		"member_of": {"$ref": "core.json#/definitions/member_ofSetProp"},
+		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
 
-
-		"subject_of": {"type": "array", "items": {"$ref": "core.json#/definitions/DigitalObject"}},
 		"attributed_by": {"type": "array", "items": {"$ref": "core.json#/definitions/AttributeAssignment"}},
 
 		"dimension": {"$ref": "core.json#/definitions/dimensionProp"},
@@ -36,9 +36,19 @@
 		"shows": {"$ref": "core.json#/definitions/showsProp"},
 		"carries": {"$ref": "core.json#/definitions/carriesProp"},
 
-		"produced_by": {"$ref": "#/definitions/Production"},
-		"destroyed_by": {"$ref": "#/definitions/Destruction"},
-		"removed_by": {"type": "array", "items": {"$ref": "#/definitions/PartRemoval"}}
+		"produced_by": {
+			"title": "crm:P108i_was_produced_by",
+			"description": "The `Production` activity which created this object",
+			"$ref": "#/definitions/Production"},
+		"destroyed_by": {
+			"title": "crm:P13i_was_destroyed_by",
+			"description": "The `Destruction` event in which this object was destroyed",
+			"$ref": "#/definitions/Destruction"},
+		"removed_by": {
+			"title": "crm:P113i_was_removed_by",
+			"description": "One or more `PartRemoval` activities in which this object was removed from another object",
+			"type": "array", 
+			"items": {"$ref": "#/definitions/PartRemoval"}}
 
 	},
 

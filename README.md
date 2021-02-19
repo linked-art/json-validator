@@ -19,6 +19,19 @@ if not errs:
 	print("Validated!")
 ```
 
+Output from the script is, for example:
+
+```
+------------------------------------------------------------------------------------------------------------------------
+Processing: ../linked.art/content/example/person/12.json
+  /member_of/0 --> 'id' is a required property 
+  /member_of/0 --> Additional properties are not allowed ('member_of', 'classified_as' were unexpected) 
+------------------------------------------------------------------------------------------------------------------------
+Processing: ../linked.art/content/example/person/13.json
+  Validated!
+```
+
+
 ## Documentation Generator
 
 Install the generator:
@@ -27,10 +40,11 @@ Install the generator:
 
 Run the generator:
 
-`generate-schema-doc --config no_show_breadcrumbs --config description_is_markdown schema/object.json html/object.html`
+`generate-schema-doc --config no_show_breadcrumbs --config description_is_markdown --config template_name=$PWD/template schema/object.json html/object.html`
 
 The options I use:
 
 * `no_show_breadcrumbs`: this prevents it from showing the path through the schema at each stage. We don't care about the structure of the schema in the API docs.
 * `description_is_markdown`: parses the `description` field in the schemas as markdown not plain text, allowing links and basic formatting
+* `template_name` is normally only `js` or `flat`, but this abuses a side effect of the os.path.join() function to allow passing arbitrary template directories in
 

@@ -5,7 +5,7 @@
     "type": "object",
     "definitions": {
         "idProp": {
-            "title": "<subject uri>",
+            "title": "the subject uri",
             "description": "The URI of the entity",
             "type": "string",
             "format": "uri"
@@ -50,7 +50,7 @@
             }
         },
         "languageProp": {
-            "title": "crm:PXX_has_language",
+            "title": "crm:P72_has_language",
             "description": "A reference to one or more `Language` entities in which the `content` of this text is written",
             "type": "array",
             "items": {
@@ -63,7 +63,7 @@
             "type": "array"
         },
         "representationProp": {
-            "title": "crm:PXX_has_representation",
+            "title": "crm:P138i_has_representation",
             "description": "A reference to one or more `VisualItem` entities which depict this entity",
             "type": "array",
             "items": {
@@ -79,7 +79,7 @@
             }
         },
         "member_ofGroupProp": {
-            "title": "crm:PXX_is_member_of",
+            "title": "crm:P107i_is_current_or_former_member_of",
             "description": "A reference to one or more `Group` entities of which this entity is a member",
             "type": "array",
             "items": {
@@ -103,7 +103,7 @@
         },
         "took_place_atProp": {
             "title": "crm:P7_took_place_at",
-            "description": "",
+            "description": "A `Place` at which this event occured",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/PlaceRef"
@@ -111,143 +111,148 @@
         },
         "timespanProp": {
             "title": "crm:P4_has_time-span",
-            "description": "",
+            "description": "A `TimeSpan` which describes the date-time range during which this event occured",
             "$ref": "#/definitions/TimeSpan"
         },
         "caused_byProp": {
-            "title": "",
-            "description": "",
+            "title": "sci:O13i_is_triggered_by",
+            "description": "Another event which caused this event to occur",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/EventRefOrActivityRef"
             }
         },
         "carried_out_byProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P14_carried_out_by",
+            "description": "A reference to a Person or Group which carried out this activity",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/PersonRefOrGroupRef"
             }
         },
         "techniqueProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P32_used_general_technique",
+            "description": "A general technique that was employed to carry out this activity",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Concept"
             }
         },
         "used_specific_objectProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P16_used_specific_object",
+            "description": "An object or set of things which was used to carry out this activity",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/HumanMadeObjectRefOrSetRef"
             }
         },
         "influenced_byProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P15_was_influenced_by",
+            "description": "A Person, Group or Object that influenced the activity in some way",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/HumanMadeObjectRefOrPersonRefOrGroupRef"
             }
         },
         "carried_outProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P14i_performed",
+            "description": "One or more activities which this entity carried out or performed",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Activity"
             }
         },
         "contact_pointProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P76_has_contact_point",
+            "description": "An identifier which can be used as a contact point or address for the entity, such as an email address",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Identifier"
             }
         },
         "residenceProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P74_has_current_or_former_residence",
+            "description": "A `Place` where this entity has resided or done business",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/PlaceRef"
             }
         },
         "dimensionProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P43_has_dimension",
+            "description": "One or more `Dimension` structures that describe this entity",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Dimension"
             }
         },
         "made_ofProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P45_consists_of",
+            "description": "One or more `Material` types of which this object is made",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/MaterialRef"
             }
         },
         "current_ownerProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P52_has_current_owner",
+            "description": "The current owner (a `Person` or `Group`) of this object",
             "type": "array",
             "items": {
                 "$ref": "core.json#/definitions/PersonRefOrGroupRef"
             }
         },
         "current_custodianProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P50_has_current_keeper",
+            "description": "The current custodian (a `Person` or `Group`) of this object, if different from its owner",
             "type": "array",
             "items": {
                 "$ref": "core.json#/definitions/PersonRefOrGroupRef"
             }
         },
         "current_permanent_custodianProp": {
-            "title": "",
-            "description": "",
+            "title": "la:current_permanent_custodian",
+            "description": "The current normal custodian (a `Person` or `Group`) if different from the current custodian, for example an object that is owned by an individual, currently in an exhibition, and normally under the custody of an organization",
             "type": "array",
             "items": {
                 "$ref": "core.json#/definitions/PersonRefOrGroupRef"
             }
         },
         "current_locationProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P55_has_current_location",
+            "description": "The current location (a `Place`) of this object",
             "$ref": "core.json#/definitions/PlaceRef"
         },
         "used_forProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P16i_was_used_for",
+            "description": "Activities that this entity was used for.",
             "type": "array",
             "items": {
                 "$ref": "core.json#/definitions/Activity"
             }
         },
         "showsProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P65_shows_visual_item",
+            "description": "A reference to a `VisualItem` that this object shows the image content of",
             "type": "array",
             "items": {
                 "$ref": "core.json#/definitions/VisualItemRef"
             }
         },
         "carriesProp": {
-            "title": "",
-            "description": "",
+            "title": "crm:P128_carries",
+            "description": "A reference to a `LinguisticObject` that this object carries the textual content of",
             "type": "array",
             "items": {
                 "$ref": "core.json#/definitions/LinguisticObjectRef"
             }
         },
-
+		"subject_ofProp": {
+            "title": "crm:P129i_is_subject_of",
+            "description": "One or more human-readable web pages or other digital objects where the focus of the content is this entity",
+			"type": "array", 
+			"items": {"$ref": "core.json#/definitions/DigitalObject"}
+		},
 
 
         "Name": {
@@ -1030,6 +1035,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1061,6 +1067,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1123,6 +1130,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1154,6 +1162,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1185,6 +1194,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1216,6 +1226,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1247,6 +1258,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1278,6 +1290,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1309,6 +1322,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1340,6 +1354,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1371,6 +1386,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1402,6 +1418,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {
@@ -1433,6 +1450,7 @@
                 "type": {
                     "allOf": [
                         {
+                            "title": "General",
                             "$ref": "#/definitions/typeProp"
                         },
                         {

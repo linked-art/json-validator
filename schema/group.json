@@ -2,6 +2,7 @@
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
 	"title": "Group Schema",
+	"description": "A Group of People and/or other Groups. See: [API](https://linked.art/api/1.0/endpoint/group/) | [Model](https://linked.art/model/actor/)",	
 	"type": "object",
 	"properties": {
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
@@ -13,9 +14,10 @@
 		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
 		"referred_to_by": {"$ref": "core.json#/definitions/referred_to_byProp"},
 		"equivalent": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/equivalentProp"}, 
-			{"title": "Specific", "description": "List of `Person` entities", "type": "array", "items": {"$ref": "core.json#/definitions/PersonRef"}}]},
+			{"title": "Specific", "description": "List of `Group` entities", "type": "array", "items": {"$ref": "core.json#/definitions/GroupRef"}}]},
 		"representation": {"$ref": "core.json#/definitions/representationProp"},
 		"member_of": {"$ref": "core.json#/definitions/member_ofGroupProp"},
+		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
 
 		"carried_out": {"$ref": "core.json#/definitions/carried_outProp"},
 		"contact_point": {"$ref": "core.json#/definitions/contact_pointProp"},

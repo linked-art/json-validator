@@ -43,6 +43,5 @@ for (k,v) in model_dirs.items():
 				errs.append(error)
 				# 	print(error.absolute_schema_path) <-- this is the current path through the schema 
 				print(f"  /{'/'.join([str(x) for x in error.absolute_path])} --> {error.message} ")
-
 			if not errs:
-				print("Validated!")
+				print("  Validated!")

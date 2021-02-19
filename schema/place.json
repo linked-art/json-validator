@@ -17,6 +17,7 @@
 			{"title": "Specific", "description": "List of `Place` entities", "type": "array", "items": {"$ref": "core.json#/definitions/PlaceRef"}}]},
 		"representation": {"$ref": "core.json#/definitions/representationProp"},
 		"member_of": {"$ref": "core.json#/definitions/member_ofSetProp"},
+		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
 
 		"defined_by": {
 			"title": "crm:P168_place_is_defined_by",
