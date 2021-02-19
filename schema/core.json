@@ -178,6 +178,76 @@
                 "$ref": "#/definitions/PlaceRef"
             }
         },
+        "dimensionProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Dimension"
+            }
+        },
+        "made_ofProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/MaterialRef"
+            }
+        },
+        "current_ownerProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/PersonRefOrGroupRef"
+            }
+        },
+        "current_custodianProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/PersonRefOrGroupRef"
+            }
+        },
+        "current_permanent_custodianProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/PersonRefOrGroupRef"
+            }
+        },
+        "current_locationProp": {
+            "title": "",
+            "description": "",
+            "$ref": "core.json#/definitions/PlaceRef"
+        },
+        "used_forProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/Activity"
+            }
+        },
+        "showsProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/VisualItemRef"
+            }
+        },
+        "carriesProp": {
+            "title": "",
+            "description": "",
+            "type": "array",
+            "items": {
+                "$ref": "core.json#/definitions/LinguisticObjectRef"
+            }
+        },
+
 
 
         "Name": {
@@ -397,7 +467,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
-                            "title": "Specific",                        	
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "Dimension"
@@ -450,7 +520,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
-                            "title": "Specific",                        	
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "MonetaryAmount"
@@ -497,7 +567,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
-                            "title": "Specific",                        	
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "Right"

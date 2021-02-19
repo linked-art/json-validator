@@ -7,7 +7,7 @@
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"$ref": "core.json#/definitions/idProp"},				
 		"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-			{"title": "Specific", "type": "string", "enum": ["Person"]}]},
+			{"title": "Specific", "type": "string", "enum": ["Group"]}]},
 		"_label": {"$ref": "core.json#/definitions/labelProp"},
 		"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
