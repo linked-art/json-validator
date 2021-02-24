@@ -54,6 +54,8 @@
 
 	"definitions": {
 		"Production": {
+			"title": "crm:E12_Production",
+			"description": "",
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
@@ -75,6 +77,8 @@
 			}
 		},
 		"Destruction": {
+			"title": "crm:E6_Destruction",
+			"description": "",
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
@@ -89,6 +93,8 @@
 			}
 		},
 		"PartRemoval": {
+			"title": "crm:E80_Part_Removal",
+			"description": "",
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 

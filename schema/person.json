@@ -18,22 +18,25 @@
 		"representation": {"$ref": "core.json#/definitions/representationProp"},
 		"member_of": {"$ref": "core.json#/definitions/member_ofGroupProp"},
 		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
-
 		"carried_out": {"$ref": "core.json#/definitions/carried_outProp"},
 		"contact_point": {"$ref": "core.json#/definitions/contact_pointProp"},
 		"residence": {"$ref": "core.json#/definitions/residenceProp"},
 
 		"born": {
+			"title": "crm:P98i_was_born",
 			"description": "The event in which this Person was born", 
 			"$ref": "#/definitions/Birth"
 		},
 		"died": {
+			"title": "crm:P100i_died_in",
 			"description": "The event in which this Person died",
 			"$ref": "#/definitions/Death"
 		}
 	},
 	"definitions": {
 		"Birth": {
+			"title": "crm:E67_Birth",
+			"description": "The birth event of a person",
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
@@ -48,6 +51,8 @@
 			}
 		},
 		"Death": {
+			"title": "crm:E69_Death", 
+			"description": "The death event of a person",
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 

@@ -28,6 +28,28 @@
         <br/>
 
         {%- set description = (schema | get_description) -%}
+
+        <!--
+        <span style="color:red;font-weight:normal;font-style:oblique;font-size:-1;">{{ schema.property_name }} / {{ schema.title }}  -> {{ schema.refers_to.title }} </span>
+        {%- if schema.refers_to.refers_to -%}
+        <b>{{ schema.refers_to.refers_to.title }}</b>
+        {%- endif -%}
+        -->
+
+
+        {%- if schema.refers_to.title and (not schema.property_name or schema.property_name == "items" or ( 
+            schema.title and (schema.title.startswith("crm:") or schema.title.startswith("la:")) or (
+            schema.refers_to.property_name and schema.refers_to.property_name[0].isupper() ) ) ) -%}
+            <span style="color:black;font-weight:normal;font-style:oblique;font-size:-1;">{{ schema.refers_to.title }}</span>
+
+        <!-- elif refers_to.refers_to -->
+
+        {%- endif -%}
+
+
+
+
+
         {%- include "section_description.html" -%}
     {%- endif -%}
 

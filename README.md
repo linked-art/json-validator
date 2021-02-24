@@ -40,11 +40,12 @@ Install the generator:
 
 Run the generator:
 
-`generate-schema-doc --config no_show_breadcrumbs --config description_is_markdown --config template_name=$PWD/template schema/object.json html/object.html`
+`generate-schema-doc --config no_show_breadcrumbs --config description_is_markdown --config template_folder=$PWD/template --config template_name=la schema/object.json html/object.html`
 
 The options I use:
 
 * `no_show_breadcrumbs`: this prevents it from showing the path through the schema at each stage. We don't care about the structure of the schema in the API docs.
 * `description_is_markdown`: parses the `description` field in the schemas as markdown not plain text, allowing links and basic formatting
-* `template_name` is normally only `js` or `flat`, but this abuses a side effect of the os.path.join() function to allow passing arbitrary template directories in
+* `template_folder` is where templates are available
+* `template_name` is the name of the template within the above folder (another directory, with the HTML, CSS and JS files in it)
 

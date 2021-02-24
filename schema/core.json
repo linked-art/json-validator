@@ -358,6 +358,8 @@
             "additionalProperties": false
         },
         "Statement": {
+            "title": "E33_Linguistic_Object",
+            "description": "An embedded, relatively short piece of textual content",
             "type": "object",
             "properties": {
                 "_label": {
@@ -620,6 +622,8 @@
             "additionalProperties": false
         },
         "Concept": {
+            "title": "crm:E55_Type",
+            "description": "",
             "type": "object",
             "properties": {
                 "id": {
@@ -916,7 +920,6 @@
             "additionalProperties": false
         },
         "NameOrIdentifier": {
-            "title": "Name or Identifier",
             "description": "A Name or an Identifier",
             "anyOf": [
                 {
@@ -928,7 +931,6 @@
             ]
         },
         "LingObjOrStatement": {
-            "title": "Linguistic Object Reference or Statement",
             "description": "A Linguistic Object Reference or Statement",
             "anyOf": [
                 {
@@ -940,7 +942,6 @@
             ]
         },
         "LingObjOrDigitalObjOrStatement": {
-            "title": "Linguistic Object Reference, Digital Object Reference or Statement",
             "description": "A Linguistic Object Reference, Digitial Object Reference or Statement",
             "anyOf": [
                 {
@@ -955,7 +956,6 @@
             ]
         },
         "PersonRefOrGroupRef": {
-            "title": "Reference to a Person or Group",
             "description": "A Reference to a Person or Group",
             "anyOf": [
                 {
@@ -987,7 +987,6 @@
             ]
         },
         "HumanMadeObjectRefOrPersonRefOrGroupRef": {
-            "title": "Reference to a Human Made Object, Person or Group",
             "description": "A Reference to a Human Made Object,Person or Group",
             "anyOf": [
                 {
@@ -1025,7 +1024,7 @@
             ]
         },
         "PlaceRef": {
-            "title": "Reference to a Place",
+            "title": "crm:E53_Place",
             "description": "Reference to a `Place`",
             "type": "object",
             "properties": {
@@ -1057,7 +1056,7 @@
             "additionalProperties": false
         },
         "PersonRef": {
-            "title": "Reference to a Person",
+            "title": "E21_Person",
             "description": "Reference to a `Person`",
             "type": "object",
             "properties": {
