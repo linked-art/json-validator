@@ -2,29 +2,48 @@
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
 	"title": "Collection Schema",
+	"description": "_la:Set_\nA collection of other resources, such as a set of objects or places.\n[API](https://linked.art/api/1.0/endpoint/set/) | [Model](https://linked.art/model/collection/)",
 	"type": "object",
-	"allOf": [{"$ref": "core.json#/definitions/APIResource"}],
 	"properties": {
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
-		"id": {"type": "string", "format": "uri"},
-		"type": {"type": "string", "enum": ["Set"]},
-		"_label": {"type": "string"},
-		"identified_by": {"type": "array", "items": {"$ref": "core.json#/definitions/NameOrIdentifier"}},
-		"classified_as": {"type": "array", "items": {"$ref": "core.json#/definitions/Concept"}},
-		"referred_to_by": {"type": "array", "items": {"$ref": "core.json#/definitions/LingObjOrDigitalObjOrStatement"}},
-		"member_of": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
-		"dimension": {"type": "array", "items": {"$ref": "core.json#/definitions/Dimension"}},
-		"created_by": {"$ref": "#/definitions/Creation"},
-		"equivalent": {"type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}},
-		"representation": {"type": "array", "items": {"$ref": "core.json#/definitions/VisualItem"}}
+		"id": {"$ref": "core.json#/definitions/idProp"},				
+		"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
+			{"title": "Specific", "type": "string", "enum": ["Set"]}]},
+		"_label": {"$ref": "core.json#/definitions/labelProp"},
+		"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
+		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
+		"referred_to_by": {"$ref": "core.json#/definitions/referred_to_byProp"},
+		"equivalent": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/equivalentProp"}, 
+			{"title": "Specific", "description": "List of equivalent `Set` entities", "type": "array", "items": {"$ref": "core.json#/definitions/SetRef"}}]},
+		"representation": {"$ref": "core.json#/definitions/representationProp"},
+		"member_of": {"$ref": "core.json#/definitions/member_ofSetProp"},
+		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
+		"attributed_by": {"$ref": "core.json#/definitions/attributed_byProp"},
+		"dimension": {"$ref": "core.json#/definitions/dimensionProp"},
+
+		"created_by": {"title": "crm:P94i_was_created_by", "$ref": "#/definitions/Creation"}
+
 	},
 	"definitions": {
 		"Creation": {
+			"title": "crm:E65_Creation",
+			"description": "The creation of the Set, potentially before any members were added",
 			"type": "object",
-			"allOf": [{"$ref": "core.json#/definitions/ActivityBase"}],
 			"properties": {
-				"type": {"type": "string", "enum": ["Creation"]},
-				"part": {"type": "array", "items": {"$ref": "#/definitions/Creation"}}
+				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
+					{"title": "Specific", "type": "string", "enum": ["Creation"]}]},
+				"_label": {"$ref": "core.json#/definitions/labelProp"},
+				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
+				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
+				"referred_to_by": {"$ref": "core.json#/definitions/referred_to_byProp"},
+				"took_place_at": {"$ref": "core.json#/definitions/took_place_atProp"},
+				"timespan": {"$ref": "core.json#/definitions/timespanProp"},
+				"caused_by": {"$ref": "core.json#/definitions/caused_byProp"},
+				"carried_out_by": {"$ref": "core.json#/definitions/carried_out_byProp"},
+				"used_specific_object": {"$ref": "core.json#/definitions/used_specific_objectProp"},
+				"influenced_by": {"$ref": "core.json#/definitions/influenced_byProp"},
+				"technique": {"$ref": "core.json#/definitions/techniqueProp"},
+				"part_of": {"$ref": "core.json#/definitions/EventRefOrActivityRef"}
 			}
 		}
 	},

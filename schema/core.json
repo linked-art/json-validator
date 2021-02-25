@@ -253,7 +253,12 @@
 			"type": "array", 
 			"items": {"$ref": "core.json#/definitions/DigitalObject"}
 		},
-
+        "attributed_byProp": {
+            "title": "crm:P140i_was_attributed_by",
+            "description": "One or more AttributeAssignments that relate some other entity to this one",
+            "type": "array", 
+            "items": {"$ref": "#/definitions/AttributeAssignment"}
+        },
 
         "Name": {
             "title": "crm:E33_E41_Linguistic_Appellation",
@@ -358,7 +363,7 @@
             "additionalProperties": false
         },
         "Statement": {
-            "title": "E33_Linguistic_Object",
+            "title": "crm:E33_Linguistic_Object",
             "description": "An embedded, relatively short piece of textual content",
             "type": "object",
             "properties": {
@@ -400,6 +405,8 @@
             "additionalProperties": false
         },
         "TimeSpan": {
+            "title": "crm:E52_Time-Span",
+            "description": "A data structure for recording a span of time",
             "type": "object",
             "properties": {
                 "_label": {
@@ -462,6 +469,8 @@
             "additionalProperties": false
         },
         "Dimension": {
+            "title": "crm:E54_Dimension",
+            "description": "A measurable aspect of an entity, with a numeric value, a unit for that value, and a type relative to the entity",
             "type": "object",
             "properties": {
                 "_label": {
@@ -498,9 +507,13 @@
                     "$ref": "#/definitions/upper_value_limitProp"
                 },
                 "unit": {
+                    "title": "crm:P91_has_unit",
+                    "description": "Reference to the MeasurementUnit for this dimension",
                     "$ref": "#/definitions/UnitRef"
                 },
                 "assigned_by": {
+                    "title": "crm:P141i_was_assigned_by",
+                    "description": "The Measurement(s) that led to the assigning of this dimension",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/AttributeAssignment"
@@ -515,6 +528,8 @@
             "additionalProperties": false
         },
         "MonetaryAmount": {
+            "title": "crm:E97_Monetary_Amount",
+            "description": "An amount of money, with a value and a currency",
             "type": "object",
             "properties": {
                 "_label": {
@@ -562,6 +577,8 @@
             "additionalProperties": false
         },
         "Right": {
+            "title": "crm:E30_Right",
+            "description": "A legal right that can be held by some party over some entity",
             "type": "object",
             "properties": {
                 "_label": {
@@ -623,7 +640,7 @@
         },
         "Concept": {
             "title": "crm:E55_Type",
-            "description": "",
+            "description": "A concept or 'Type' in the taxonomic sense",
             "type": "object",
             "properties": {
                 "id": {
@@ -661,6 +678,8 @@
             "additionalProperties": false
         },
         "Activity": {
+            "title": "crm:E7_Activity",
+            "description": "An activity carried out by some person or group",
             "type": "object",
             "properties": {
                 "type": {
@@ -721,6 +740,8 @@
             "additionalProperties": false
         },
         "AttributeAssignment": {
+            "title": "crm:E13_Attribute_Assignment",
+            "description": "An activity which involves the assignment of some value to some entity, often with an explicit relationship between value and entity",
             "type": "object",
             "properties": {
                 "type": {
@@ -775,6 +796,8 @@
                     "$ref": "#/definitions/EventRefOrActivityRef"
                 },
                 "assigned": {
+                    "title": "*",
+                    "description": "Attribute Assignments can assign any entity or structure",
                     "type": "object"
                 }
             },
@@ -784,6 +807,8 @@
             "additionalProperties": false
         },
         "VisualItem": {
+            "title": "crm:E36_Visual_Item",
+            "description": "The visual form of an entity",            
             "type": "object",
             "properties": {
                 "type": {
@@ -816,6 +841,7 @@
             }
         },
         "DigitalObject": {
+            "title": "dig:D1_Digital_Object",
             "type": "object",
             "properties": {
                 "type": {
@@ -848,6 +874,7 @@
             }
         },
         "HumanMadeObjectPart": {
+            "title": "crm:E22_Human-Made_Object",
             "type": "object",
             "properties": {
                 "type": {
@@ -1023,6 +1050,50 @@
                 }
             ]
         },
+        "AnyRef": {
+            "title": "*",
+            "description": "Reference to another primary entity",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "Title": "Specific",
+                            "type": "string",
+                            "enum": [
+                                "HumanMadeObject",
+                                "Person",
+                                "Group",
+                                "VisualItem",
+                                "LinguisticObject",
+                                "Set",
+                                "Place",
+                                "DigitalObject",
+                                "Type",
+                                "Event",
+                                "Activity",
+                                "Period"
+                            ]
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
         "PlaceRef": {
             "title": "crm:E53_Place",
             "description": "Reference to a `Place`",
@@ -1038,6 +1109,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "Place"
@@ -1070,6 +1142,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "Person"
@@ -1088,7 +1161,7 @@
             "additionalProperties": false
         },
         "GroupRef": {
-            "title": "Reference to a Group",
+            "title": "crm:E74_Group",
             "description": "Reference to a `Group`",
             "type": "object",
             "properties": {
@@ -1101,6 +1174,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "Group"
@@ -1119,7 +1193,7 @@
             "additionalProperties": false
         },
         "HumanMadeObjectRef": {
-            "title": "Reference to a Human-Made Object",
+            "title": "crm:E22_Human-Made_Object",
             "description": "Reference to a `HumanMadeObject`",
             "type": "object",
             "properties": {
@@ -1133,6 +1207,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "HumanMadeObject"
@@ -1151,7 +1226,7 @@
             "additionalProperties": false
         },
         "DigitalObjectRef": {
-            "title": "Reference to a Digital Object",
+            "title": "dig:D1_Digital_Object",
             "description": "Reference to a `DigitalObject`",
             "type": "object",
             "properties": {
@@ -1165,6 +1240,7 @@
                             "$ref": "#/definitions/typeProp"
                         },
                         {
+                            "title": "Specific",
                             "type": "string",
                             "enum": [
                                 "DigitalObject"
@@ -1183,7 +1259,7 @@
             "additionalProperties": false
         },
         "LinguisticObjectRef": {
-            "title": "Reference to a Linguistic Object",
+            "title": "crm:E33_Linguistic_Object",
             "description": "Reference to a `LinguisticObject`",
             "type": "object",
             "properties": {
@@ -1215,7 +1291,7 @@
             "additionalProperties": false
         },
         "SetRef": {
-            "title": "Reference to a Set",
+            "title": "la:Set",
             "description": "Reference to a `Set`",
             "type": "object",
             "properties": {
@@ -1247,7 +1323,7 @@
             "additionalProperties": false
         },
         "EventRef": {
-            "title": "Reference to an Event",
+            "title": "crm:E6_Event",
             "description": "Reference to an `Event`",
             "type": "object",
             "properties": {
@@ -1279,7 +1355,7 @@
             "additionalProperties": false
         },
         "ActivityRef": {
-            "title": "Reference to an Activity",
+            "title": "crm:E7_Activity",
             "description": "Reference to an `Activity`",
             "type": "object",
             "properties": {
@@ -1311,7 +1387,7 @@
             "additionalProperties": false
         },
         "VisualItemRef": {
-            "title": "Reference to a Visual Item",
+            "title": "crm:E36_Visual_Item",
             "description": "Reference to a `VisualItem`",
             "type": "object",
             "properties": {
@@ -1343,7 +1419,7 @@
             "additionalProperties": false
         },
         "UnitRef": {
-            "title": "Reference to a Measurement Unit",
+            "title": "crm:E58_Measurement_Unit",
             "description": "Reference to a `MeasurementUnit`",
             "type": "object",
             "properties": {
@@ -1375,7 +1451,7 @@
             "additionalProperties": false
         },
         "CurrencyRef": {
-            "title": "Reference to a Currency",
+            "title": "crm:E98_Currency",
             "description": "Reference to a `Currency`",
             "type": "object",
             "properties": {
@@ -1407,7 +1483,7 @@
             "additionalProperties": false
         },
         "MaterialRef": {
-            "title": "Reference to a Material",
+            "title": "crm:E57_Material",
             "description": "Reference to a `Material`",
             "type": "object",
             "properties": {
@@ -1439,7 +1515,7 @@
             "additionalProperties": false
         },
         "LanguageRef": {
-            "title": "Reference to a Language",
+            "title": "crm:E56_Language",
             "description": "Reference to a `Language`",
             "type": "object",
             "properties": {

@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/schema#",
 	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
 	"title": "Person Schema",
-	"description": "A human. See: [API](https://linked.art/api/1.0/endpoint/person/) | [Model](https://linked.art/model/actor/)",	
+	"description": "_crm:E21\\_Person_\nA human.\nSee: [API](https://linked.art/api/1.0/endpoint/person/) | [Model](https://linked.art/model/actor/)",	
 	"type": "object",
 	"properties": {
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
@@ -18,6 +18,8 @@
 		"representation": {"$ref": "core.json#/definitions/representationProp"},
 		"member_of": {"$ref": "core.json#/definitions/member_ofGroupProp"},
 		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
+		"attributed_by": {"$ref": "core.json#/definitions/attributed_byProp"},
+
 		"carried_out": {"$ref": "core.json#/definitions/carried_outProp"},
 		"contact_point": {"$ref": "core.json#/definitions/contact_pointProp"},
 		"residence": {"$ref": "core.json#/definitions/residenceProp"},

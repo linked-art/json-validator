@@ -12,7 +12,6 @@ model_dirs = {
 	"place": "place",
 	"person": "person",
 	"group": "group",
-	"text": "text",
 	"object": "object"
 }
 
