@@ -13,12 +13,23 @@
         "labelProp": {
             "title": "rdfs:label",
             "description": "A human readable name or label for the entity, intended for developers",
-            "type": "string"
+            "type": "string",
+            "examples": [
+                "Georgia O'Keeffe",
+                "Blue by Georgia O'Keeffe",
+                "New Haven, CT"
+            ]
         },
         "typeProp": {
             "title": "rdf:type",
-            "description": "The class of the entity, such as `Person`, `Place` or `HumanMadeObject`",
-            "type": "string"
+            "description": "The class of the entity",
+            "type": "string",
+            "examples": [
+                "Person",
+                "Place",
+                "Type",
+                "HumanMadeObject"
+            ]
         },
         "identified_byProp": {
             "title": "crm:P1_is_identified_by",
@@ -60,14 +71,17 @@
         "equivalentProp": {
             "title": "la:equivalent",
             "description": "A reference to one or more other identities for this entity, such as in external vocabularies or systems",
-            "type": "array"
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/AnyRef"
+            }
         },
         "representationProp": {
             "title": "crm:P138i_has_representation",
             "description": "A reference to one or more `VisualItem` entities which depict this entity",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/VisualItem"
+                "$ref": "#/definitions/VisualItem"
             }
         },
         "member_ofSetProp": {
@@ -75,7 +89,7 @@
             "description": "A reference to one or more `Set` entities of which this entity is a member",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/SetRef"
+                "$ref": "#/definitions/SetRef"
             }
         },
         "member_ofGroupProp": {
@@ -83,23 +97,34 @@
             "description": "A reference to one or more `Group` entities of which this entity is a member",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/GroupRef"
+                "$ref": "#/definitions/GroupRef"
             }
         },
         "valueProp": {
             "title": "crm:P90_has_value",
             "description": "The numeric value of a `Dimension` or `MonetaryAmount`",
-            "type": "number"
+            "type": "number",
+            "examples": [
+                10,
+                0.5,
+                42.75
+            ]
         },
         "upper_value_limitProp": {
             "title": "crm:P90a_has_upper_value_limit",
             "description": "The highest possible value for the `Dimension` or `MonetaryAmount`",
-            "type": "number"
+            "type": "number",
+            "examples": [
+                100
+            ]
         },
         "lower_value_limitProp": {
             "title": "crm:P90a_has_lower_value_limit",
             "description": "The lowest possible value for the `Dimension` or `MonetaryAmount`",
-            "type": "number"
+            "type": "number",
+            "examples": [
+                5
+            ]
         },
         "took_place_atProp": {
             "title": "crm:P7_took_place_at",
@@ -199,7 +224,7 @@
             "description": "The current owner (a `Person` or `Group`) of this object",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/PersonRefOrGroupRef"
+                "$ref": "#/definitions/PersonRefOrGroupRef"
             }
         },
         "current_custodianProp": {
@@ -207,7 +232,7 @@
             "description": "The current custodian (a `Person` or `Group`) of this object, if different from its owner",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/PersonRefOrGroupRef"
+                "$ref": "#/definitions/PersonRefOrGroupRef"
             }
         },
         "current_permanent_custodianProp": {
@@ -215,20 +240,20 @@
             "description": "The current normal custodian (a `Person` or `Group`) if different from the current custodian, for example an object that is owned by an individual, currently in an exhibition, and normally under the custody of an organization",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/PersonRefOrGroupRef"
+                "$ref": "#/definitions/PersonRefOrGroupRef"
             }
         },
         "current_locationProp": {
             "title": "crm:P55_has_current_location",
             "description": "The current location (a `Place`) of this object",
-            "$ref": "core.json#/definitions/PlaceRef"
+            "$ref": "#/definitions/PlaceRef"
         },
         "used_forProp": {
             "title": "crm:P16i_was_used_for",
             "description": "Activities that this entity was used for.",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/Activity"
+                "$ref": "#/definitions/Activity"
             }
         },
         "showsProp": {
@@ -236,7 +261,7 @@
             "description": "A reference to a `VisualItem` that this object shows the image content of",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/VisualItemRef"
+                "$ref": "#/definitions/VisualItemRef"
             }
         },
         "carriesProp": {
@@ -244,14 +269,14 @@
             "description": "A reference to a `LinguisticObject` that this object carries the textual content of",
             "type": "array",
             "items": {
-                "$ref": "core.json#/definitions/LinguisticObjectRef"
+                "$ref": "#/definitions/LinguisticObjectRef"
             }
         },
 		"subject_ofProp": {
             "title": "crm:P129i_is_subject_of",
             "description": "One or more human-readable web pages or other digital objects where the focus of the content is this entity",
 			"type": "array", 
-			"items": {"$ref": "core.json#/definitions/DigitalObject"}
+			"items": {"$ref": "#/definitions/DigitalObjectRef"}
 		},
         "attributed_byProp": {
             "title": "crm:P140i_was_attributed_by",
@@ -259,10 +284,37 @@
             "type": "array", 
             "items": {"$ref": "#/definitions/AttributeAssignment"}
         },
+        "formatProp": {
+            "title": "dc:format",
+            "description": "The media type of the content of the embedded text, e.g. text/plain",
+            "type": "string",
+            "examples": [
+                "text/html",
+                "image/jpeg"
+            ]
+        },
+        "conforms_toProp": {
+            "title": "dcterms:conformsTo",
+            "description": "A standard or specification that this entity conforms to or embodies",
+            "type": "array",
+            "items": {"$ref": "#/definitions/InfoObjectRef"}
+        },
+        "access_pointProp": {
+            "title": "la:access_point",
+            "description": "A URL from which the digital object is able to be retrieved",
+            "type": "array",
+            "items": {"$ref": "#/definitions/DigitalObjectRef"}
+        },
+        "digitally_available_viaProp": {
+            "title": "la:digitally_available_via",
+            "description": "A digital service that may be interacted with in order to retrieve or act upon the digital object",
+            "type": "array",
+            "items": {"$ref": "#/definitions/DigitalService"}
+        },
 
         "Name": {
             "title": "crm:E33_E41_Linguistic_Appellation",
-            "description": "A name of an entity",
+            "description": "A name of an entity\nSee: [API](https://linked.art/api/1.0/shared/name/) | [Model](https://linked.art/model/base/#names)",
             "type": "object",
             "properties": {
                 "_label": {
@@ -277,9 +329,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Name"
-                            ]
+                            "const": "Name"
                         }
                     ]
                 },
@@ -307,11 +357,35 @@
                 "type",
                 "content"
             ],
-            "additionalProperties": false
+            "additionalProperties": false,
+            "examples": [
+                {
+                    "type": "Name",
+                    "content": "Georgia O'Keeffe"
+                },
+                {
+                    "type": "Name",
+                    "content": "Blue",
+                    "classified_as": [
+                        {
+                            "id": "http://vocab.getty.edu/aat/300404670",
+                            "type": "Type",
+                            "_label": "Primary Name"
+                        }
+                    ],
+                    "language": [
+                        {
+                            "id": "http://vocab.getty.edu/aat/300388277",
+                            "type": "Language",
+                            "_label": "English"
+                        }
+                    ]
+                }
+            ]
         },
         "Identifier": {
             "title": "crm:E42_Identifier",
-            "description": "An identifier for an entity",
+            "description": "An identifier for an entity\nSee: [API](https://linked.art/api/1.0/shared/identifier/) | [Model](https://linked.art/model/base/#identifiers)",
             "type": "object",
             "properties": {
                 "_label": {
@@ -326,9 +400,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Identifier"
-                            ]
+                            "const": "Identifier"
                         }
                     ]
                 },
@@ -364,7 +436,7 @@
         },
         "Statement": {
             "title": "crm:E33_Linguistic_Object",
-            "description": "An embedded, relatively short piece of textual content",
+            "description": "An embedded, relatively short piece of textual content\nSee: [API](https://linked.art/api/1.0/shared/statement/) | [Model](https://linked.art/model/base/#statements-about-a-resource)",
             "type": "object",
             "properties": {
                 "_label": {
@@ -379,9 +451,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "LinguisticObject"
-                            ]
+                            "const": "LinguisticObject"
                         }
                     ]
                 },
@@ -396,6 +466,9 @@
                 },
                 "language": {
                     "$ref": "#/definitions/languageProp"
+                },
+                "format": {
+                    "$ref": "#/definitions/formatProp"
                 }
             },
             "required": [
@@ -406,7 +479,7 @@
         },
         "TimeSpan": {
             "title": "crm:E52_Time-Span",
-            "description": "A data structure for recording a span of time",
+            "description": "A data structure for recording a span of time\nSee: [API](https://linked.art/api/1.0/shared/timespan/) | [Model](https://linked.art/model/base/#time-span-details)",
             "type": "object",
             "properties": {
                 "_label": {
@@ -421,9 +494,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "TimeSpan"
-                            ]
+                            "const": "TimeSpan"
                         }
                     ]
                 },
@@ -470,7 +541,7 @@
         },
         "Dimension": {
             "title": "crm:E54_Dimension",
-            "description": "A measurable aspect of an entity, with a numeric value, a unit for that value, and a type relative to the entity",
+            "description": "A measurable aspect of an entity, with a numeric value, a unit for that value, and a type relative to the entity\nSee: [API](https://linked.art/api/1.0/shared/dimension/) | [Model](https://linked.art/model/object/physical/#dimensions)",
             "type": "object",
             "properties": {
                 "_label": {
@@ -485,9 +556,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Dimension"
-                            ]
+                            "const": "Dimension"
                         }
                     ]
                 },
@@ -529,7 +598,7 @@
         },
         "MonetaryAmount": {
             "title": "crm:E97_Monetary_Amount",
-            "description": "An amount of money, with a value and a currency",
+            "description": "An amount of money, with a value and a currency\nSee: [API](https://linked.art/api/1.0/shared/money/) | [Model](https://linked.art/model/provenance/acquisition.html#payments)",
             "type": "object",
             "properties": {
                 "_label": {
@@ -544,9 +613,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "MonetaryAmount"
-                            ]
+                            "const": "MonetaryAmount"
                         }
                     ]
                 },
@@ -576,7 +643,7 @@
             ],
             "additionalProperties": false
         },
-        "Right": {
+        "LegalRight": {
             "title": "crm:E30_Right",
             "description": "A legal right that can be held by some party over some entity",
             "type": "object",
@@ -593,9 +660,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Right"
-                            ]
+                            "const": "Right"
                         }
                     ]
                 },
@@ -629,7 +694,7 @@
                 "part": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitionsRight"
+                        "$ref": "#/definitions/LegalRight"
                     }
                 }
             },
@@ -640,7 +705,7 @@
         },
         "Concept": {
             "title": "crm:E55_Type",
-            "description": "A concept or 'Type' in the taxonomic sense",
+            "description": "A concept or 'Type' in the taxonomic sense\nSee: [API](https://linked.art/api/1.0/shared/type/) | [Model](https://linked.art/model/base/#types-and-classifications)",
             "type": "object",
             "properties": {
                 "id": {
@@ -658,9 +723,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Type"
-                            ]
+                            "const": "Type"
                         }
                     ]
                 },
@@ -691,9 +754,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Activity"
-                            ]
+                            "const": "Activity"
                         }
                     ]
                 },
@@ -753,9 +814,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "AttributeAssignment"
-                            ]
+                            "const": "AttributeAssignment"
                         }
                     ]
                 },
@@ -820,9 +879,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "VisualItem"
-                            ]
+                            "const": "VisualItem"
                         }
                     ]
                 },
@@ -840,8 +897,8 @@
                 }
             }
         },
-        "DigitalObject": {
-            "title": "dig:D1_Digital_Object",
+        "DigitalService": {
+            "title": "la:DigitalService",
             "type": "object",
             "properties": {
                 "type": {
@@ -853,9 +910,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "DigitalObject"
-                            ]
+                            "const": "DigitalService"
                         }
                     ]
                 },
@@ -870,6 +925,12 @@
                 },
                 "referred_to_by": {
                     "$ref": "#/definitions/referred_to_byProp"
+                },
+                "access_point": {
+                    "$ref": "#/definitions/access_pointProp"
+                },
+                "conforms_to": {
+                    "$ref": "#/definitions/conforms_toProp"                    
                 }
             }
         },
@@ -879,9 +940,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": [
-                        "HumanMadeObject"
-                    ]
+                    "const": "HumanMadeObject"
                 },
                 "_label": {
                     "type": "string"
@@ -907,37 +966,37 @@
                 "dimension": {
                     "type": "array",
                     "items": {
-                        "$ref": "core.json#/definitions/Dimension"
+                        "$ref": "#/definitions/Dimension"
                     }
                 },
                 "made_of": {
                     "type": "array",
                     "items": {
-                        "$ref": "core.json#/definitions/MaterialRef"
+                        "$ref": "#/definitions/MaterialRef"
                     }
                 },
                 "part": {
                     "type": "array",
                     "items": {
-                        "$ref": "core.json#/definitions/HumanMadeObjectPart"
+                        "$ref": "#/definitions/HumanMadeObjectPart"
                     }
                 },
                 "shows": {
                     "type": "array",
                     "items": {
-                        "$ref": "core.json#/definitions/VisualItemRef"
+                        "$ref": "#/definitions/VisualItemRef"
                     }
                 },
                 "carries": {
                     "type": "array",
                     "items": {
-                        "$ref": "core.json#/definitions/LinguisticObjectRef"
+                        "$ref": "#/definitions/LinguisticObjectRef"
                     }
                 },
                 "representation": {
                     "type": "array",
                     "items": {
-                        "$ref": "core.json#/definitions/VisualItem"
+                        "$ref": "#/definitions/VisualItem"
                     }
                 }
             },
@@ -1034,9 +1093,7 @@
                 {
                     "title": "Linked Art",
                     "type": "string",
-                    "enum": [
-                        "https://linked.art/ns/v1/linked-art.json"
-                    ]
+                    "const": "https://linked.art/ns/v1/linked-art.json"
                 },
                 {
                     "title": "Linked Art with Extensions",
@@ -1052,7 +1109,7 @@
         },
         "AnyRef": {
             "title": "*",
-            "description": "Reference to another primary entity",
+            "description": "Reference to another primary entity\nSee: [API](https://linked.art/api/1.0/shared/reference/) | [Model]()",
             "type": "object",
             "properties": {
                 "id": {
@@ -1096,7 +1153,7 @@
         },
         "PlaceRef": {
             "title": "crm:E53_Place",
-            "description": "Reference to a `Place`",
+            "description": "Reference to a `Place` entity\nSee: [Schema](place.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1111,9 +1168,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Place"
-                            ]
+                            "const": "Place"
                         }
                     ]
                 },
@@ -1129,7 +1184,7 @@
         },
         "PersonRef": {
             "title": "E21_Person",
-            "description": "Reference to a `Person`",
+            "description": "Reference to a `Person`\nSee: [Schema](person.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1144,9 +1199,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Person"
-                            ]
+                            "const": "Person"
                         }
                     ]
                 },
@@ -1162,7 +1215,7 @@
         },
         "GroupRef": {
             "title": "crm:E74_Group",
-            "description": "Reference to a `Group`",
+            "description": "Reference to a `Group`\nSee: [Schema](group.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1176,9 +1229,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "Group"
-                            ]
+                            "const": "Group"
                         }
                     ]
                 },
@@ -1193,7 +1244,7 @@
             "additionalProperties": false
         },
         "HumanMadeObjectRef": {
-            "title": "crm:E22_Human-Made_Object",
+            "title": "crm:E22_Human-Made_Object\nSee: [Schema](object.html)",
             "description": "Reference to a `HumanMadeObject`",
             "type": "object",
             "properties": {
@@ -1209,9 +1260,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "HumanMadeObject"
-                            ]
+                            "const": "HumanMadeObject"
                         }
                     ]
                 },
@@ -1226,7 +1275,7 @@
             "additionalProperties": false
         },
         "DigitalObjectRef": {
-            "title": "dig:D1_Digital_Object",
+            "title": "dig:D1_Digital_Object\nSee: [Schema](digital.html)",
             "description": "Reference to a `DigitalObject`",
             "type": "object",
             "properties": {
@@ -1242,9 +1291,7 @@
                         {
                             "title": "Specific",
                             "type": "string",
-                            "enum": [
-                                "DigitalObject"
-                            ]
+                            "const": "DigitalObject"
                         }
                     ]
                 },
@@ -1260,7 +1307,7 @@
         },
         "LinguisticObjectRef": {
             "title": "crm:E33_Linguistic_Object",
-            "description": "Reference to a `LinguisticObject`",
+            "description": "Reference to a `LinguisticObject`\nSee: [Schema](text.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1274,9 +1321,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "LinguisticObject"
-                            ]
+                            "const": "LinguisticObject"
                         }
                     ]
                 },
@@ -1292,7 +1337,7 @@
         },
         "SetRef": {
             "title": "la:Set",
-            "description": "Reference to a `Set`",
+            "description": "Reference to a `Set`\nSee: [Schema](set.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1306,9 +1351,37 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "Set"
-                            ]
+                            "const": "Set"
+                        }
+                    ]
+                },
+                "_label": {
+                    "$ref": "#/definitions/labelProp"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "InfoObjectRef": {
+            "title": "crm:E73_Information_Object",
+            "description": "Reference to an `InformationObject`",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/idProp"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "title": "General",
+                            "$ref": "#/definitions/typeProp"
+                        },
+                        {
+                            "type": "string",
+                            "const": "InformationObject"
                         }
                     ]
                 },
@@ -1324,7 +1397,7 @@
         },
         "EventRef": {
             "title": "crm:E6_Event",
-            "description": "Reference to an `Event`",
+            "description": "Reference to an `Event`\nSee: [Schema](event.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1338,9 +1411,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "Event"
-                            ]
+                            "const": "Event"
                         }
                     ]
                 },
@@ -1356,7 +1427,7 @@
         },
         "ActivityRef": {
             "title": "crm:E7_Activity",
-            "description": "Reference to an `Activity`",
+            "description": "Reference to an `Activity`\nSee: [Schema](event.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1370,9 +1441,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "Activity"
-                            ]
+                            "const": "Activity"
                         }
                     ]
                 },
@@ -1388,7 +1457,7 @@
         },
         "VisualItemRef": {
             "title": "crm:E36_Visual_Item",
-            "description": "Reference to a `VisualItem`",
+            "description": "Reference to a `VisualItem`\nSee: [Schema](image.html)",
             "type": "object",
             "properties": {
                 "id": {
@@ -1402,9 +1471,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "VisualItem"
-                            ]
+                            "const": "VisualItem"
                         }
                     ]
                 },
@@ -1434,9 +1501,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "MeasurementUnit"
-                            ]
+                            "const": "MeasurementUnit"
                         }
                     ]
                 },
@@ -1466,9 +1531,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "Currency"
-                            ]
+                            "const": "Currency"
                         }
                     ]
                 },
@@ -1498,9 +1561,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "Material"
-                            ]
+                            "const": "Material"
                         }
                     ]
                 },
@@ -1530,9 +1591,7 @@
                         },
                         {
                             "type": "string",
-                            "enum": [
-                                "Language"
-                            ]
+                            "const": "Language"
                         }
                     ]
                 },

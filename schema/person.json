@@ -8,7 +8,7 @@
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"$ref": "core.json#/definitions/idProp"},				
 		"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-			{"title": "Specific", "type": "string", "enum": ["Person"]}]},
+			{"title": "Specific", "type": "string", "const": "Person"}]},
 		"_label": {"$ref": "core.json#/definitions/labelProp"},
 		"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
@@ -42,7 +42,7 @@
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-					{"title": "Specific", "type": "string", "enum": ["Birth"]}]},
+					{"title": "Specific", "type": "string", "const": "Birth"}]},
 				"_label": {"$ref": "core.json#/definitions/labelProp"},
 				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
@@ -58,7 +58,7 @@
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-					{"title": "Specific", "type": "string", "enum": ["Death"]}]},
+					{"title": "Specific", "type": "string", "const": "Death"}]},
 				"_label": {"$ref": "core.json#/definitions/labelProp"},
 				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},

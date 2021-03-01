@@ -31,11 +31,15 @@ body {
 }
 
 .btn.example-show.collapsed:before {
-    content: "show"
+    content: "Show example";
+}
+
+.btn.example-show.collapsed {
+    margin-bottom: 10px;    
 }
 
 .btn.example-show:before {
-    content: "hide"
+    content: "Hide"
 }
 
 .description.collapse:not(.show) {
@@ -92,7 +96,8 @@ body {
 }
 
 .examples {
-	padding: 1rem !important;
+	padding: 0.5rem !important;
+    margin-bottom: 1rem;
 }
 
 .examples pre {

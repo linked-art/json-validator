@@ -8,7 +8,7 @@
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"$ref": "core.json#/definitions/idProp"},				
 		"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-			{"title": "Specific", "type": "string", "enum": ["Place"]}]},
+			{"title": "Specific", "type": "string", "const": "Place"}]},
 		"_label": {"$ref": "core.json#/definitions/labelProp"},
 		"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},

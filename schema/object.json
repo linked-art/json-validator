@@ -8,7 +8,7 @@
 		"@context": {"$ref": "core.json#/definitions/ContextStringOrArray"},
 		"id": {"$ref": "core.json#/definitions/idProp"},				
 		"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-			{"title": "Specific", "type": "string", "enum": ["HumanMadeObject"]}]},
+			{"title": "Specific", "type": "string", "const": "HumanMadeObject"}]},
 		"_label": {"$ref": "core.json#/definitions/labelProp"},
 		"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 		"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
@@ -57,7 +57,7 @@
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-					{"title": "Specific", "type": "string", "enum": ["Production"]}]},
+					{"title": "Specific", "type": "string", "const": "Production"}]},
 				"_label": {"$ref": "core.json#/definitions/labelProp"},
 				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
@@ -80,7 +80,7 @@
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-					{"title": "Specific", "type": "string", "enum": ["Destruction"]}]},
+					{"title": "Specific", "type": "string", "const": "Destruction"}]},
 				"_label": {"$ref": "core.json#/definitions/labelProp"},
 				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
@@ -96,7 +96,7 @@
 			"type": "object",
 			"properties": {
 				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-					{"title": "Specific", "type": "string", "enum": ["PartRemoval"]}]},
+					{"title": "Specific", "type": "string", "const": "PartRemoval"}]},
 				"_label": {"$ref": "core.json#/definitions/labelProp"},
 				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
 				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},

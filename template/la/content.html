@@ -95,7 +95,7 @@
                 </div>
             {%- endif -%}
             {%- if schema.kw_const -%}
-                <span class="const-value" id="{{ schema.kw_const.html_id }}">Specific value: <code>{{ schema.kw_const.literal | python_to_json }}</code></span>
+                <span class="const-value" id="{{ schema.kw_const.html_id }}">Value: <code>{{ schema.kw_const.literal | python_to_json }}</code></span>
             {%- endif -%}
 
             {# Pattern (Regular Expression) #}
@@ -119,16 +119,16 @@
                 {% include "section_array.html" %}
             {%- endif -%}
 
+            {# Properties, pattern properties, additional properties #}
+            {%- for sub_property in schema.iterate_properties -%}
+                {% include "section_properties.html" %}
+            {%- endfor -%}
+
             {# Display examples #}
             {%- set examples = schema.examples -%}
             {%- if examples -%}
                 {% include "section_examples.html" %}
             {%- endif -%}
-
-            {# Properties, pattern properties, additional properties #}
-            {%- for sub_property in schema.iterate_properties -%}
-                {% include "section_properties.html" %}
-            {%- endfor -%}
 
         {%- endif -%}
     {%- endif -%}
