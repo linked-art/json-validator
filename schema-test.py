@@ -9,13 +9,14 @@ import json
 
 
 model_dirs = {
-	"place": "place",
+#	"place": "place",
 	"person": "person",
 	"group": "group",
 	"object": "object"
 }
 
 base_instance_dir = "../linked.art/content/example"
+base_instance_dir = "../articular/data"
 schema_dir = "schema"
 
 for (k,v) in model_dirs.items():
