@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/schema#",
-	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"$id": "digital.json",
 	"title": "Digital Object Schema",
 	"description": "_dig:D1\\_Digital\\_Object_\nA digital resource, such as a web page or image.\nSee: [API](https://linked.art/api/1.0/endpoint/digital_object/) | [Model](https://linked.art/model/digital/)",
 	"type": "object",
