@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/schema#",
-	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"$id": "image.json",
 	"title": "Visual Content Schema",
 	"description": "_crm:E36\\_Visual\\_Item_\nThe visual content of a work.\nSee: [API](https://linked.art/api/1.0/endpoint/visual_work/) | [Model](https://linked.art/model/object/aboutness/#physical-object-and-visual-work)",
 	"type": "object",
