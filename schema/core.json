@@ -61,6 +61,14 @@
                 "$ref": "#/definitions/LingObjOrDigitalObjOrStatement"
             }
         },
+        "aboutProp": {
+            "title": "crm:P129_is_about", 
+            "description": "The main topic(s) of the content", 
+            "type": "array", 
+            "items": {
+                "$ref": "core.json#/definitions/AnyRef"
+            }
+        },
         "languageProp": {
             "title": "crm:P72_has_language",
             "description": "A reference to one or more `Language` entities in which the `content` of this text is written",
@@ -174,10 +182,10 @@
         },
         "influenced_byProp": {
             "title": "crm:P15_was_influenced_by",
-            "description": "A Person, Group or Object that influenced the activity in some way",
+            "description": "An entity that influenced the activity in some way",
             "type": "array",
             "items": {
-                "$ref": "#/definitions/HumanMadeObjectRefOrPersonRefOrGroupRef"
+                "$ref": "#/definitions/AnyRef"
             }
         },
         "carried_outProp": {
@@ -698,6 +706,9 @@
                 "referred_to_by": {
                     "$ref": "#/definitions/referred_to_byProp"
                 },
+                "created_by": {
+                    "title": "crm:P94i_was_created_by", "$ref": "#/definitions/Creation"
+                },
                 "possessed_by": {
                     "type": "array",
                     "items": {
@@ -709,6 +720,27 @@
                 "type"
             ],
             "additionalProperties": false
+        },
+        "Creation": {
+            "title": "crm:E65_Creation",
+            "description": "The creation of the intellectual/conceptual entity",
+            "type": "object",
+            "properties": {
+                "type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
+                    {"title": "Specific", "type": "string", "const": "Creation"}]},
+                "_label": {"$ref": "core.json#/definitions/labelProp"},
+                "identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
+                "classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
+                "referred_to_by": {"$ref": "core.json#/definitions/referred_to_byProp"},
+                "took_place_at": {"$ref": "core.json#/definitions/took_place_atProp"},
+                "timespan": {"$ref": "core.json#/definitions/timespanProp"},
+                "caused_by": {"$ref": "core.json#/definitions/caused_byProp"},
+                "carried_out_by": {"$ref": "core.json#/definitions/carried_out_byProp"},
+                "used_specific_object": {"$ref": "core.json#/definitions/used_specific_objectProp"},
+                "influenced_by": {"$ref": "core.json#/definitions/influenced_byProp"},
+                "technique": {"$ref": "core.json#/definitions/techniqueProp"},
+                "part_of": {"title": "crm:P9i_forms_part_of", "description": "An identified event or activity which this creation is part of", "$ref": "core.json#/definitions/EventRefOrActivityRef"}
+            }
         },
         "Concept": {
             "title": "crm:E55_Type",
@@ -1230,20 +1262,6 @@
                 },
                 {
                     "$ref": "#/definitions/SetRef"
-                }
-            ]
-        },
-        "HumanMadeObjectRefOrPersonRefOrGroupRef": {
-            "description": "A Reference to a Human Made Object,Person or Group",
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/HumanMadeObjectRef"
-                },
-                {
-                    "$ref": "#/definitions/PersonRef"
-                },
-                {
-                    "$ref": "#/definitions/GroupRef"
                 }
             ]
         },

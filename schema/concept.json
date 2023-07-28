@@ -19,6 +19,7 @@
 		"member_of": {"$ref": "core.json#/definitions/member_ofSetProp"},
 		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
 		"attributed_by": {"$ref": "core.json#/definitions/attributed_byRelProp"},
+		"created_by": {"title": "crm:P94i_was_created_by", "$ref": "core.json#/definitions/Creation"},
 
 		"broader": {
 			"title": "skos:broader",

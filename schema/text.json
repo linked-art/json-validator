@@ -20,40 +20,24 @@
 		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
 		"attributed_by": {"$ref": "core.json#/definitions/attributed_byRelProp"},
 		"dimension": {"$ref": "core.json#/definitions/dimensionProp"},
-		"subject_to": {"$ref": "core.json#/definitions/subject_toProp"},
-
-		"part_of": {"title": "crm:P106i_forms_part_of", "description": "Reference to another Linguistic Object of which this is part", "$ref": "core.json#/definitions/LinguisticObjectRef"},
-        "content": {"$ref": "core.json#/definitions/contentProp"},
+		"subject_to": {"$ref": "core.json#/definitions/subject_toProp"},		
         "format": {"$ref": "core.json#/definitions/formatProp"},
 		"language": {"$ref": "core.json#/definitions/languageProp"},
+		"about": {"$ref": "core.json#/definitions/aboutProp"},
+		"created_by": {"title": "crm:P94i_was_created_by", "$ref": "core.json#/definitions/Creation"},
+		"used_for": {
+			"title": "crm:P16i_was_used_for", 
+			"description": "", 
+			"type": "array", 
+			"items": {"$ref": "core.json#/definitions/Activity"}},
+		"part_of": {
+			"title": "crm:P106i_forms_part_of",
+			"description": "Reference to another Linguistic Object of which this is part", 
+			"type": "array",
+			"items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
+        "content": {"$ref": "core.json#/definitions/contentProp"}
 
-		"about": {"title": "crm:P129_is_about", "description": "The main topic(s) of the content", "type": "array", "items": {"$ref": "core.json#/definitions/AnyRef"}},
-		"created_by": {"title": "crm:P94i_was_created_by", "$ref": "#/definitions/Creation"},
-		"used_for": {"title": "crm:P16i_was_used_for", "description": "", "type": "array", "items": {"$ref": "core.json#/definitions/Activity"}}
 
-	},
-	"definitions": {
-		"Creation": {
-			"title": "crm:E65_Creation",
-			"description": "The creation / writing of the text",
-			"type": "object",
-			"properties": {
-				"type": {"allOf": [{"title": "General", "$ref": "core.json#/definitions/typeProp"}, 
-					{"title": "Specific", "type": "string", "const": "Creation"}]},
-				"_label": {"$ref": "core.json#/definitions/labelProp"},
-				"identified_by": {"$ref": "core.json#/definitions/identified_byProp"},
-				"classified_as": {"$ref": "core.json#/definitions/classified_asProp"},
-				"referred_to_by": {"$ref": "core.json#/definitions/referred_to_byProp"},
-				"took_place_at": {"$ref": "core.json#/definitions/took_place_atProp"},
-				"timespan": {"$ref": "core.json#/definitions/timespanProp"},
-				"caused_by": {"$ref": "core.json#/definitions/caused_byProp"},
-				"carried_out_by": {"$ref": "core.json#/definitions/carried_out_byProp"},
-				"used_specific_object": {"$ref": "core.json#/definitions/used_specific_objectProp"},
-				"influenced_by": {"$ref": "core.json#/definitions/influenced_byProp"},
-				"technique": {"$ref": "core.json#/definitions/techniqueProp"},
-				"part_of": {"title": "crm:P9i_forms_part_of", "description": "An identified event or activity which this creation is part of", "$ref": "core.json#/definitions/EventRefOrActivityRef"}
-			}
-		}
 	},
 	"required": ["@context", "id", "type", "_label"],
 	"additionalProperties": false
