@@ -1,6 +1,6 @@
 {
-	"$schema": "http://json-schema.org/schema#",
-	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://linked.art/api/1.0/schema/object.json",
 	"title": "Human-Made Object Schema",
 	"description": "_crm:E22\\_Human-Made\\_Object_\nA human-made object, part thereof, or a natural object with value imbued through interaction with human culture.\nSee: [API](https://linked.art/api/1.0/endpoint/object/) | [Model](https://linked.art/model/object/)",	
 	"type": "object",

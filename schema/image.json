@@ -1,6 +1,6 @@
 {
-	"$schema": "http://json-schema.org/schema#",
-	"$id": "file:///Users/rs2668/Development/other/linked-art/json-validator/schema/",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://linked.art/api/1.0/schema/image.json",
 	"title": "Visual Content Schema",
 	"description": "_crm:E36\\_Visual\\_Item_\nThe visual content of a work.\nSee: [API](https://linked.art/api/1.0/endpoint/visual_work/) | [Model](https://linked.art/model/object/aboutness/#physical-object-and-visual-work)",
 	"type": "object",
@@ -19,6 +19,7 @@
 		"subject_of": {"$ref": "core.json#/definitions/subject_ofProp"},
 		"attributed_by": {"$ref": "core.json#/definitions/attributed_byRelProp"},
 		"dimension": {"$ref": "core.json#/definitions/dimensionProp"},
+		"subject_to": {"$ref": "core.json#/definitions/subject_toProp"},
 
 		"part_of": {"title": "crm:P106i_forms_part_of", "description": "Another Visual Item which this Visual Item is part of", "$ref": "core.json#/definitions/VisualItemRef"},
 		"digitally_shown_by": {"title": "la:digitally_carried_by", "description": "", "type": "array", "items": {"$ref": "core.json#/definitions/DigitalObjectRef"}},
