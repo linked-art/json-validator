@@ -36,8 +36,6 @@
 			"type": "array",
 			"items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
         "content": {"$ref": "core.json#/definitions/contentProp"}
-
-
 	},
 	"required": ["@context", "id", "type", "_label"],
 	"additionalProperties": false

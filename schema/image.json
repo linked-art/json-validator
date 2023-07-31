@@ -20,8 +20,12 @@
 		"attributed_by": {"$ref": "core.json#/definitions/attributed_byRelProp"},
 		"dimension": {"$ref": "core.json#/definitions/dimensionProp"},
 		"subject_to": {"$ref": "core.json#/definitions/subject_toProp"},
+		"part_of": {
+			"title": "crm:P106i_forms_part_of",
+			"description": "Reference to another Visual Item of which this is part", 
+			"type": "array",
+			"items": {"$ref": "core.json#/definitions/VisualItemRef"}},
 
-		"part_of": {"title": "crm:P106i_forms_part_of", "description": "Another Visual Item which this Visual Item is part of", "$ref": "core.json#/definitions/VisualItemRef"},
 		"about": {"$ref": "core.json#/definitions/aboutProp"},
 		"created_by": {"title": "crm:P94i_was_created_by", "$ref": "core.json#/definitions/Creation"},
 		"represents": {"title": "crm:P138_represents", "description": "An entity which is represented in this image content", "type": "array", "items": {"$ref": "core.json#/definitions/AnyRef"}},
