@@ -26,12 +26,6 @@
 			"type": "string"
 
 		},
-		"approximated_by": {
-			"title": "crm:P189i_is_approximated_by",
-			"description": "This `Place` is approximately the same area as the given entities",  
-			"type": "array", 
-			"items": {"$ref": "core.json#/definitions/PlaceRef"}
-		},
 		"part_of": {
 			"title": "crm:P89_falls_within",
 			"description": "This `Place` is contained within one or more larger `Place` entities",

@@ -32,9 +32,9 @@
 			"items": {"$ref": "core.json#/definitions/Activity"}},
 		"part_of": {
 			"title": "crm:P106i_forms_part_of",
-			"description": "Reference to another Linguistic Object of which this is part", 
+			"description": "Reference to another Linguistic Object or Visual Item of which this is part", 
 			"type": "array",
-			"items": {"$ref": "core.json#/definitions/LinguisticObjectRef"}},
+			"items": {"$ref": "core.json#/definitions/LingObjOrVisualItemRef"}},
         "content": {"$ref": "core.json#/definitions/contentProp"}
 	},
 	"required": ["@context", "id", "type", "_label"],

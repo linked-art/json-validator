@@ -22,9 +22,9 @@
 		"subject_to": {"$ref": "core.json#/definitions/subject_toProp"},
 		"part_of": {
 			"title": "crm:P106i_forms_part_of",
-			"description": "Reference to another Visual Item of which this is part", 
+			"description": "Reference to another Visual Item or Linguistic Object of which this is part", 
 			"type": "array",
-			"items": {"$ref": "core.json#/definitions/VisualItemRef"}},
+			"items": {"$ref": "core.json#/definitions/LingObjOrVisualItemRef"}},
 
 		"about": {"$ref": "core.json#/definitions/aboutProp"},
 		"created_by": {"title": "crm:P94i_was_created_by", "$ref": "core.json#/definitions/Creation"},

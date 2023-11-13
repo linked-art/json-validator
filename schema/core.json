@@ -378,6 +378,9 @@
                 "language": {
                     "$ref": "#/definitions/languageProp"
                 },
+                "referred_to_by": {
+                    "$ref": "/definitions/referred_to_byProp"
+                },
                 "part": {
                     "description": "A list of one or more `Name` structures, which are parts of this `Name`",
                     "type": "array",
@@ -490,6 +493,9 @@
                 },
                 "identified_by": {
                     "$ref": "#/definitions/identified_byProp"
+                },
+                "referred_to_by": {
+                    "$ref": "#/definitions/referred_to_byProp"
                 },
                 "classified_as": {
                     "$ref": "#/definitions/classified_asProp"
@@ -1214,6 +1220,17 @@
             "anyOf": [
                 {
                     "$ref": "#/definitions/Statement"
+                },
+                {
+                    "$ref": "#/definitions/LinguisticObjectRef"
+                }
+            ]
+        },
+        "LingObjOrVisualItemRef": {
+            "description": "A Linguistic Object Reference or Visual Item Reference",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/VisualItemRef"
                 },
                 {
                     "$ref": "#/definitions/LinguisticObjectRef"
