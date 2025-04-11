@@ -12,7 +12,7 @@ from json_schema_for_humans.generation_configuration import GenerationConfigurat
 #generate.TEMPLATE_FILE_NAME = TEMPLATE_FILE_NAME
 
 
-config=GenerationConfiguration(show_breadcrumbs=False, description_is_markdown=False,custom_template_path="template/la/base_nohtml.html")
+config=GenerationConfiguration(show_breadcrumbs=False, description_is_markdown=True,custom_template_path="template/la/base_nohtml.html")
 
 
 entries = ['object', 'place', 'person', 'group', 'set', 'text', 'image', 'provenance', 'event', 'digital', 'abstract', 'concept']
